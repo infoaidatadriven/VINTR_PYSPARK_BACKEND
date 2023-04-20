@@ -1,0 +1,11 @@
+{
+    "schema": {
+        
+        "0": {
+            "USERNAME": "SYS"
+        },
+        "1": {
+            "USERNAME": "SYSTEM"
+        }
+    }
+}

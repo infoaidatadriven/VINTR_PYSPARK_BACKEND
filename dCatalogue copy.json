@@ -1,0 +1,3543 @@
+{
+    "datacatalogues": [
+      {
+        "Column": "PassengerId",
+        "id": "c1",
+        "BusinessTerm": "Passenger Identification Number",
+        "Definition": "Every passanger is assigned with unique id",
+        "Classification": "Identity",
+        "DataDomain": "Travel",
+        "RelatedTerms": "",
+        "RelatedSource": "",
+        "RelatedReports": "",
+        "DataOwners": "Vinoth",
+        "DataUsers": "Admin",
+        "RelatedTags": "passenger Identification",
+        "datalineage": [
+          {
+            "LineageName": "File Storage",
+            "Details": {
+              "Name": "titanic.xls",
+              "Type": "File",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          },
+          {
+            "LineageName": "Extract",
+            "Details": {
+              "Name": "titanicDataset",
+              "Type": "Dataset",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          },
+          {
+            "LineageName": "Cleaning Process",
+            "Details": {
+              "Name": "Impute",
+              "Type": "Dataset",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          },
+          {
+            "LineageName": "Report",
+            "Details": {
+              "Name": "Impute",
+              "Type": "Report",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "Column": "Pclass",
+        "id": "c2",
+        "BusinessTerm": "Ticket class",
+        "Definition": " 1 = 1st, 2 = 2nd, 3 = 3rd ; A proxy for socio-economic status (SES) 1st = Upper,2nd = Middle,3rd = Lower",
+        "Classification": "Categorial",
+        "DataDomain": "Travel",
+        "RelatedTerms": "",
+        "RelatedSource": "",
+        "RelatedReports": "",
+        "DataOwners": "Vinoth",
+        "DataUsers": "Admin",
+        "RelatedTags": "Classification",
+        "datalineage": [
+          {
+            "LineageName": "File Storage",
+            "Details": {
+              "Name": "titanic.xls",
+              "Type": "File",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          },
+          {
+            "LineageName": "Extract",
+            "Details": {
+              "Name": "titanicDataset",
+              "Type": "Dataset",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          },
+          {
+            "LineageName": "Cleaning Process",
+            "Details": {
+              "Name": "Impute",
+              "Type": "Dataset",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          },
+          {
+            "LineageName": "Report",
+            "Details": {
+              "Name": "Impute",
+              "Type": "Report",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "Column": "Name",
+        "id": "c3",
+        "BusinessTerm": "Name of the passanger",
+        "Definition": "Numeric",
+        "Classification": "",
+        "DataDomain": "Travel",
+        "DataSubDomain": "Personel",
+        "RelatedTerms": "",
+        "RelatedSource": "",
+        "RelatedReports": "",
+        "DataOwners": "",
+        "DataUsers": "",
+        "RelatedTags": "",
+        "datalineage": [
+          {
+            "LineageName": "File Storage",
+            "Details": {
+              "Name": "titanic.xls",
+              "Type": "File",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          },
+          {
+            "LineageName": "Extract",
+            "Details": {
+              "Name": "titanicDataset",
+              "Type": "Dataset",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          },
+          {
+            "LineageName": "Cleaning Process",
+            "Details": {
+              "Name": "Impute",
+              "Type": "Dataset",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          },
+          {
+            "LineageName": "Report",
+            "Details": {
+              "Name": "Impute",
+              "Type": "Report",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "Column": "Sex",
+        "id": "c4",
+        "BusinessTerm": "Gender",
+        "Definition": "Numeric",
+        "Classification": "Categorial",
+        "DataDomain": "Travel",
+        "DataSubDomain": "Personel",
+        "RelatedTerms": "",
+        "RelatedSource": "",
+        "RelatedReports": "",
+        "DataOwners": "Vinoth",
+        "DataUsers": "Admin",
+        "RelatedTags": "Classification",
+        "datalineage": [
+          {
+            "LineageName": "File Storage",
+            "Details": {
+              "Name": "titanic.xls",
+              "Type": "File",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          },
+          {
+            "LineageName": "Extract",
+            "Details": {
+              "Name": "titanicDataset",
+              "Type": "Dataset",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          },
+          {
+            "LineageName": "Cleaning Process",
+            "Details": {
+              "Name": "Impute",
+              "Type": "Dataset",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          },
+          {
+            "LineageName": "Report",
+            "Details": {
+              "Name": "Impute",
+              "Type": "Report",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "Column": "Age",
+        "id": "c5",
+        "BusinessTerm": "Age in Years",
+        "Definition": "Age is fractional if less than 1. If the age is estimated, is it in the form of xx.5",
+        "Classification": "",
+        "DataDomain": "Travel",
+        "DataSubDomain": "Personel",
+        "RelatedTerms": "",
+        "RelatedSource": "",
+        "RelatedReports": "",
+        "DataOwners": "",
+        "DataUsers": "",
+        "RelatedTags": "",
+        "datalineage": [
+          {
+            "LineageName": "File Storage",
+            "Details": {
+              "Name": "titanic.xls",
+              "Type": "File",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          },
+          {
+            "LineageName": "Extract",
+            "Details": {
+              "Name": "titanicDataset",
+              "Type": "Dataset",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          },
+          {
+            "LineageName": "Cleaning Process",
+            "Details": {
+              "Name": "Impute",
+              "Type": "Dataset",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          },
+          {
+            "LineageName": "Report",
+            "Details": {
+              "Name": "Impute",
+              "Type": "Report",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "Column": "SibSp",
+        "id": "c6",
+        "BusinessTerm": "# of siblings / spouses aboard the Titanic",
+        "Definition": "The dataset defines family relations in this way...Sibling = brother, sister, stepbrother, stepsister,Spouse = husband, wife (mistresses and fiances were ignored)",
+        "Classification": "",
+        "DataDomain": "Travel",
+        "RelatedTerms": "",
+        "RelatedSource": "",
+        "RelatedReports": "",
+        "DataOwners": "",
+        "DataUsers": "",
+        "RelatedTags": "",
+        "datalineage": [
+          {
+            "LineageName": "File Storage",
+            "Details": {
+              "Name": "titanic.xls",
+              "Type": "File",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          },
+          {
+            "LineageName": "Extract",
+            "Details": {
+              "Name": "titanicDataset",
+              "Type": "Dataset",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          },
+          {
+            "LineageName": "Cleaning Process",
+            "Details": {
+              "Name": "Impute",
+              "Type": "Dataset",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          },
+          {
+            "LineageName": "Report",
+            "Details": {
+              "Name": "Impute",
+              "Type": "Report",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "Column": "Parch",
+        "id": "c7",
+        "BusinessTerm": "# of parents / children aboard the Titanic",
+        "Definition": "The dataset defines family relations in this way...Parent = mother, father ,Child = daughter, son, stepdaughter, stepson Some children travelled only with a nanny, therefore parch=0 for them",
+        "Classification": "",
+        "DataDomain": "Travel",
+        "RelatedTerms": "",
+        "RelatedSource": "",
+        "RelatedReports": "",
+        "DataOwners": "",
+        "DataUsers": "",
+        "RelatedTags": "",
+        "datalineage": [
+          {
+            "LineageName": "File Storage",
+            "Details": {
+              "Name": "titanic.xls",
+              "Type": "File",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          },
+          {
+            "LineageName": "Extract",
+            "Details": {
+              "Name": "titanicDataset",
+              "Type": "Dataset",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          },
+          {
+            "LineageName": "Cleaning Process",
+            "Details": {
+              "Name": "Impute",
+              "Type": "Dataset",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          },
+          {
+            "LineageName": "Report",
+            "Details": {
+              "Name": "Impute",
+              "Type": "Report",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "Column": "Ticket",
+        "id": "c8",
+        "BusinessTerm": "Ticket number",
+        "Definition": "Numeric",
+        "Classification": "",
+        "DataDomain": "Travel",
+        "RelatedTerms": "",
+        "RelatedSource": "",
+        "RelatedReports": "",
+        "DataOwners": "",
+        "DataUsers": "",
+        "RelatedTags": "",
+        "datalineage": [
+          {
+            "LineageName": "File Storage",
+            "Details": {
+              "Name": "titanic.xls",
+              "Type": "File",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          },
+          {
+            "LineageName": "Extract",
+            "Details": {
+              "Name": "titanicDataset",
+              "Type": "Dataset",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          },
+          {
+            "LineageName": "Cleaning Process",
+            "Details": {
+              "Name": "Impute",
+              "Type": "Dataset",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          },
+          {
+            "LineageName": "Report",
+            "Details": {
+              "Name": "Impute",
+              "Type": "Report",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "Column": "Fare",
+        "id": "c9",
+        "BusinessTerm": "Passenger fare",
+        "Definition": "Numeric",
+        "Classification": "",
+        "DataDomain": "Travel",
+        "RelatedTerms": "",
+        "RelatedSource": "",
+        "RelatedReports": "",
+        "DataOwners": "",
+        "DataUsers": "",
+        "RelatedTags": "",
+        "datalineage": [
+          {
+            "LineageName": "File Storage",
+            "Details": {
+              "Name": "titanic.xls",
+              "Type": "File",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          },
+          {
+            "LineageName": "Extract",
+            "Details": {
+              "Name": "titanicDataset",
+              "Type": "Dataset",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          },
+          {
+            "LineageName": "Cleaning Process",
+            "Details": {
+              "Name": "Impute",
+              "Type": "Dataset",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          },
+          {
+            "LineageName": "Report",
+            "Details": {
+              "Name": "Impute",
+              "Type": "Report",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "Column": "Cabin",
+        "id": "c10",
+        "BusinessTerm": "Cabin number",
+        "Definition": "Numeric",
+        "Classification": "",
+        "DataDomain": "Travel",
+        "RelatedTerms": "",
+        "RelatedSource": "",
+        "RelatedReports": "",
+        "DataOwners": "",
+        "DataUsers": "",
+        "RelatedTags": "",
+        "datalineage": [
+          {
+            "LineageName": "File Storage",
+            "Details": {
+              "Name": "titanic.xls",
+              "Type": "File",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          },
+          {
+            "LineageName": "Extract",
+            "Details": {
+              "Name": "titanicDataset",
+              "Type": "Dataset",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          },
+          {
+            "LineageName": "Cleaning Process",
+            "Details": {
+              "Name": "Impute",
+              "Type": "Dataset",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          },
+          {
+            "LineageName": "Report",
+            "Details": {
+              "Name": "Impute",
+              "Type": "Report",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "Column": "Embarked",
+        "id": "c11",
+        "BusinessTerm": "Port of Embarkation",
+        "Definition": "C = Cherbourg, Q = Queenstown, S = Southampton",
+        "Classification": "Categorial",
+        "DataDomain": "Travel",
+        "RelatedTerms": "",
+        "RelatedSource": "",
+        "RelatedReports": "",
+        "DataOwners": "Vinoth",
+        "DataUsers": "Admin",
+        "RelatedTags": "Classification",
+        "datalineage": [
+          {
+            "LineageName": "File Storage",
+            "Details": {
+              "Name": "titanic.xls",
+              "Type": "File",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          },
+          {
+            "LineageName": "Extract",
+            "Details": {
+              "Name": "titanicDataset",
+              "Type": "Dataset",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          },
+          {
+            "LineageName": "Cleaning Process",
+            "Details": {
+              "Name": "Impute",
+              "Type": "Dataset",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          },
+          {
+            "LineageName": "Report",
+            "Details": {
+              "Name": "Impute",
+              "Type": "Report",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "Column": "AIRLINE",
+        "Definition": "The name of a Airline",
+        "BusinessTerm": "Airline name",
+        "Classification": "Identity",
+        "DataDomain": "Travel-AIRLINE",
+        "RelatedTerms": "",
+        "RelatedSource": "",
+        "RelatedReports": "",
+        "DataOwners": "Vinoth",
+        "DataUsers": "Admin",
+        "RelatedTags": "AIRLINE Identification",
+        "id": "c12",
+        "datalineage": [
+          {
+            "LineageName": "File Storage",
+            "Details": {
+              "Name": "titanic.xls",
+              "Type": "File",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          },
+          {
+            "LineageName": "Extract",
+            "Details": {
+              "Name": "titanicDataset",
+              "Type": "Dataset",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          },
+          {
+            "LineageName": "Cleaning Process",
+            "Details": {
+              "Name": "Impute",
+              "Type": "Dataset",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          },
+          {
+            "LineageName": "Report",
+            "Details": {
+              "Name": "Impute",
+              "Type": "Report",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "Column": "AIRLINE_No",
+        "Definition": "The registeration number of a Airline",
+        "BusinessTerm": "Airline number",
+        "Classification": "Identity",
+        "DataDomain": "Travel_AIRLINE",
+        "RelatedTerms": "",
+        "RelatedSource": "",
+        "RelatedReports": "",
+        "DataOwners": "Vinoth",
+        "DataUsers": "Admin",
+        "RelatedTags": "AIRLINE Identification",
+        "id": "c14",
+        "datalineage": [
+          {
+            "LineageName": "File Storage",
+            "Details": {
+              "Name": "titanic.xls",
+              "Type": "File",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          },
+          {
+            "LineageName": "Extract",
+            "Details": {
+              "Name": "titanicDataset",
+              "Type": "Dataset",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          },
+          {
+            "LineageName": "Cleaning Process",
+            "Details": {
+              "Name": "Impute",
+              "Type": "Dataset",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          },
+          {
+            "LineageName": "Report",
+            "Details": {
+              "Name": "Impute",
+              "Type": "Report",
+              "metaData": [
+                {
+                  "Column": "PassengerId",
+                  "id": "c1",
+                  "BusinessTerm": "Passenger Identification Number"
+                },
+                {
+                  "Column": "Pclass",
+                  "id": "c2",
+                  "BusinessTerm": "Ticket class"
+                },
+                {
+                  "Column": "Name",
+                  "id": "c3",
+                  "BusinessTerm": "Name of the Passanger"
+                },
+                {
+                  "Column": "Sex",
+                  "id": "c4",
+                  "BusinessTerm": "Gender"
+                },
+                {
+                  "Column": "Age",
+                  "id": "c5",
+                  "BusinessTerm": "Age in Years"
+                },
+                {
+                  "Column": "SibSp",
+                  "id": "c6",
+                  "BusinessTerm": "# of siblings / spouses aboard the Titanic"
+                },
+                {
+                  "Column": "Parch",
+                  "id": "c7",
+                  "BusinessTerm": "# of parents / children aboard the Titanic"
+                },
+                {
+                  "Column": "Ticket",
+                  "id": "c8",
+                  "BusinessTerm": "Ticket number"
+                },
+                {
+                  "Column": "Fare",
+                  "id": "c9",
+                  "BusinessTerm": "Passenger fare"
+                },
+                {
+                  "Column": "Cabin",
+                  "id": "c10",
+                  "BusinessTerm": "Cabin number"
+                },
+                {
+                  "Column": "Embarked",
+                  "id": "c11",
+                  "BusinessTerm": "Port of Embarkation"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }

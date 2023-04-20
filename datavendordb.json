@@ -1,0 +1,21 @@
+{
+    "vendorDataTypeList": [
+      {
+        "label": "Equities",
+        "value": "EQUITIES",
+        "status": "Active",
+        "vendor": [
+          {
+            "label": "BB",
+            "value": "BB",
+            "status": "Active"
+          },
+          {
+            "label": "RE",
+            "value": "RE",
+            "status": "Active"
+          }
+        ]
+      }
+    ]
+  }

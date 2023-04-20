@@ -1,0 +1,101 @@
+Bloomberg Exchange Code,Bloomberg Composite Code,Country,Description,ISO MIC,Google Prefix,EOD code,# of Stocks
+CY,None,Cyprus,Cyprus Stock Exchange,XCYS,None,None,1
+KK,None,Kuwait,Kuwait Stock Exchange,XKUW,None,None,33
+TT,None,Taiwan,Taiwan Stock Exchange,XTAI,TPE,TW,563
+XB,None,United Kingdom,Cinnober BOAT,BOAT,None,None,1
+UR,US,USA,NASDAQ Capital Market,XNCM,NASDAQ,US,"2,123"
+BS,BZ,Brazil,XBSP,BVMF,BVMF,SA,367
+RX,RM,Russia,Standard-Classica-Forts,MISX,MCX,MCX,66
+QT,GR,Germany,QUOTRIX,XQTX,None,None,1
+HB,None,Hungary,Budapest Stock Exchange,XBUD,BDP,BUD,5
+MM,None,Mexico,Bolsa Mexicana De Valores (Mexican Stock Exchange),XMEX,BMV,MX,90
+UA,US,USA,NYSE American,XASE,NYSEAMERICAN,US,264
+RF,None,Iceland,First North Iceland,XICE,None,None,1
+ID,None,Ireland,Irish Stock Exchange - All Market,XDUB,IRE,IR,29
+NZ,None,New Zealand,New Zealand Exchange Ltd,XNZE,NZE,NZ,55
+LN,None,United Kingdom,London Stock Exchange,XLON,LON,LSE,583
+SL,None,Sri Lanka,Colombo Stock Exchange,XCOL,None,None,4
+SE,SW,Switzerland,Six Swiss Exchange,XSWX,SWX,SW,127
+LI,None,United Kingdom,London Stock Exchange International,None,LON,IL,39
+QF,CN,Canada,Aequitas NEO Exchange (Lit Book),NEOE,None,None,2
+PK,PA,Pakistan,Karachi Stock Exchange (Guarantee) Limited,XKAR,KAR,KAR,41
+CX,CB,Colombia,Bolsa De Valores De Colombia,XBOG,None,None,33
+EC,EY,Egypt,Egyptian Exchange,XCAI,CAI,None,32
+MK,None,Malaysia,Bursa Malaysia,XKLS,KUL,KLSE,252
+NS,None,Norway,Norwegian OTC Market,NOTC,None,None,1
+UF,US,USA,CBOE BATS BZX,BATS,BATS,US,1
+UQ,US,USA,NASDAQ Global Market,XNMS,NASDAQ,US,650
+AF,AR,Argentina,Bolsa de Comercio de Buenos Aires,XBUE,None,BA,12
+OM,None,Oman,Muscat Securities Market,XMUS,None,None,9
+PM,None,Philippines,Philippine Stock Exchange Inc.,XPHS,PSE,PSE,70
+SP,None,Singapore,Singapore Exchange,XSES,SGX,SG,242
+KQ,KS,South Korea,Korea Exchange (Kosdaq),XKOS,KOSDAQ,KQ,270
+EB,None,United Kingdom,BATS Trading Europe,BATE,None,None,2
+TQ,None,United Kingdom,Turquoise,TRQX,None,None,3
+UP,US,USA,NYSE Arca,ARCX,NYSEARCA,US,3
+UW,US,USA,NASDAQ Global Select,XNGS,NASDAQ,US,"1,753"
+ZA,CZ,Croatia,Zagreb Stock Exchange,XZAG,None,None,1
+BI,None,Bahrain,Bahrain Bourse,XBAH,None,None,4
+GA,None,Greece,Athens Exchange S.A. Cash Market,XATH,ATH,AT,27
+NO,None,Norway,Oslo Bors Asa,XOSL,None,OL,113
+None,None,The Netherlands,Nyse Euronext - Euronext Amsterdam,XAMS,AMS,AS,83
+TI,None,Turkey,Istanbul Stock Exchange,XIST,IST,IS,92
+DU,UH,United Arab Emirates,Abu Dhabi Securities Exchange,XADS,None,None,16
+CC,CI,Chile,Santiago Stock Exchange,XSGO,None,SN,64
+AO,AU,Australia,National Stock Exchange of Australia,XNEC,None,None,1
+RE,RO,Romania,Spot Regulated Market - Bvb,XBSE,None,None,8
+SJ,None,South Africa,Johannesburg Stock Exchange,XJSE,JNB,JSE,170
+DH,UH,United Arab Emirates,Nasdaq Dubai,DIFX,None,None,7
+DC,None,Denmark,Omx Nordic Exchange Copenhagen A/S,XCSE,CPH,CO,65
+JR,None,Jordan,Amman Stock Exchange,XAMM,None,None,5
+KN,None,Kenya,Nairobi Stock Exchange,XNAI,None,None,5
+NL,None,Nigeria,Nigerian Stock Exchange,XNSA,None,None,12
+PW,None,Poland,Warsaw Stock Exchange/Equities/Main Market,XWAR,WSE,WAR,65
+QD,None,Qatar,Qatar Exchange,DSMD,None,None,35
+BC,None,Senegal,None,XBRV,None,None,1
+DB,UH,United Arab Emirates,Dubai Financial Market,XDFM,DFM,None,18
+PO,None,United Kingdom,ITG Posit,XPOS,None,None,1
+AV,None,Austria,Wiener Boerse Ag,XWBO,VIE,VI,38
+BB,None,Belgium,Nyse Euronext - Euronext Brussels,XBRU,EBR,BR,75
+FH,None,Finland,Nasdaq Omx Helsinki Ltd.,XHEL,HEL,HE,74
+LX,None,Luxembourg,Luxembourg Stock Exchange,XLUX,None,None,1
+SS,None,Sweden,Nasdaq Omx Nordic,XSTO,STO,ST,337
+IX,None,United Kingdom,Chi-X Eruope,CHIX,None,None,2
+UV,US,USA,OTC markets,OOTC,OTCMKTS,US,"2,140"
+VM,VN,Vietnam,Hochiminh Stock Exchange,XSTC,None,VN,39
+GD,GR,Germany,Dusseldorf Stock Exchange,XDUS,None,DU,1
+GY,GR,Germany,Deutsche Boerse Xetra,XETR,ETR,XETRA,105
+IB,IN,India,BSE LTD,XBOM,BOM,BSE,440
+IT,None,Israel,Tel Aviv Stock Exchange,XTAE,TLV,TA,158
+IM,None,Italy,Borsa Italiana S.P.A.,MTAA,BIT,MI,145
+TG,None,Taiwan,Tapei Exchange,ROCO,None,TWO,21
+UN,US,USA,New York Stock Exchange,XNYS,NYSE,US,"3,202"
+FP,None,France,Euronext Paris,XPAR,EPA,PA,235
+BD,None,Bangladesh,Dhaka Stock Exchange Ltd,XDHA,None,None,17
+CF,CN,Canada,Canadian Securities Exchange,XCNQ,None,CN,58
+GB,GR,Germany,Boerse Berlin,XBER,FRA,BE,3
+GM,GR,Germany,Munich Stock Exchange,XMUN,None,MU,1
+IJ,None,Indonesia,Indonesia Stock Exchange,XIDX,JAK,JK,129
+AB,None,Saudi Arabia,Saudi Stock Exchange,XSAU,None,SR,130
+SY,None,Syria,Damascus Securities Exchange,XDSE,None,None,1
+TB,None,Thailand,Stock Exchange Of Thailand,XBKK,BAK,BK,374
+VH,VN,Vietnam,Hanoi Stock Exchange,HSTC,None,None,4
+CG,CH,China,Shanghai Stock Exchange,XSHG,SHA,SHG,"1,261"
+CK,CP,Czech Republic,Prague Stock Exchange,XPRA,PRG,None,10
+BQ,GR,Germany,Equiduct Trading,XEQT,None,None,3
+JT,JP,Japan,Tokyo Stock Exchange,XTKS,TYO,TSE,"1,734"
+PE,None,Peru,Bolsa De Valores De Lima,XLIM,None,None,24
+KP,KS,South Korea,Korea Exchange (Stock Market),XKRX,KRX,KO,419
+VX,SW,Switzerland,Six Swiss - Blue Chips Segment,XVTX,VTX,VX,31
+CS,CH,China,Shenzhen Stock Exchange,XSHE,SHE,SHE,"1,805"
+GF,GR,Germany,Frankfurt Stock Exchange,XFRA,FRA,F,167
+HK,None,Hong Kong,Hong Kong Exchange,XHKG,HKG,HK,"1,832"
+IS,IN,India,National Stock Exchange Of India,XNSE,NSE,NSE,554
+SM,None,Spain,Bolsa De Madrid,XMAD,BME,MC,125
+MT,None,The Netherlands,TOM MTF,TOMX,None,None,1
+AT,AU,Australia,Asx - All Markets,XASX,ASX,AU,874
+CT,CN,Canada,Toronto Stock Exchange,XTSE,TSE,TO,515
+CV,CN,Canada,TSX Venture Exchange,XTSX,None,V,136
+GS,GR,Germany,Stuttgart Stock Exchange,XSTU,None,STU,1
+MC,None,Morocco,Casablanca Stock Exchange,XCAS,None,None,12
+PL,None,Portugal,Nyse Euronext - Euronext Lisbon,XLIS,ELI,LS,19

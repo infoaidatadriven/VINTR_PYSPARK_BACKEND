@@ -1,0 +1,100 @@
+{
+  "Rights": [
+    {
+      "Value": "ROLE_MANAGEMENT",
+      "Text": "Role ManagemenT"
+    },
+    {
+      "Value": "ASSIGN_ROLE",
+      "Text": "Assign Role"
+    },
+    {
+      "Value": "REMOVE_ROLE",
+      "Text": "Remove Role"
+    },
+    {
+      "Value": "ADD_RULESET",
+      "Text": "Add Ruleset"
+    },
+    {
+      "Value": "UPDATE_RULESET",
+      "Text": "Update Rule Set"
+    },
+    {
+      "Value": "VIEW_RULESET",
+      "Text": "View Ruleset"
+    },
+    {
+      "Value": "REMOVE_RULESET",
+      "Text": "Remove Ruleset"
+    },
+    {
+      "Value": "VIEW_RESULTS",
+      "Text": "View Results"
+    },
+    {
+      "Value": "APPROVE_RULESET",
+      "Text": "Approve Ruleset"
+    },
+    {
+      "Value": "APPROVE_RULE",
+      "Text": "Approve Rule"
+    },
+    {
+      "Value": "ADD_SOURCEFILE",
+      "Text": "Add SourceFile"
+    },
+    {
+      "Value": "UPDATE_SOURCEFILE",
+      "Text": "Update SourceFile"
+    },
+    {
+      "Value": "VIEW_SOURCEFILE",
+      "Text": "View SourceFile"
+    },
+    {
+      "Value": "REMOVE_SOURCEFILE",
+      "Text": "Remove SourceFile"
+    },
+    {
+      "Value": "ADD_REPORT",
+      "Text": "Add Report"
+    },
+    {
+      "Value": "UPDATE_REPORT",
+      "Text": "Update Report"
+    },
+    {
+      "Value": "VIEW_REPORT",
+      "Text": "View Report"
+    },
+    {
+      "Value": "REMOVE_REPORT",
+      "Text": "Remove Report"
+    },
+    {
+      "Value": "PROCESS_ANALYSIS",
+      "Text": "Process Analysis"
+    },
+    {
+      "Value": "CONFIGURE_SOURCE",
+      "Text": "Configure Source"
+    },
+    {
+      "Value": "EDIT_SOURCE",
+      "Text": "EditSource"
+    },
+    {
+      "Value": "CONFIGURE_REFERENCE",
+      "Text": "configure Reference"
+    },
+    {
+      "Value": "EDIT_REFERENCE",
+      "Text": "edit reference"
+    },
+    {
+      "Value": "USER_MANAGEMENT",
+      "Text": "User Management"
+    }
+  ]
+}

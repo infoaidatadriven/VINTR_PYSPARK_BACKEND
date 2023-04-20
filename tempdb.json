@@ -1,0 +1,60 @@
+{
+    "dq": {
+      "overall": "98.83",
+      "detail": {
+        "Uniqueness": {
+          "value": "100.00",
+          "info": [
+            {
+              "rule": "Duplicate count check"
+            }
+          ]
+        },
+        "Completeness": {
+          "value": "100.00",
+          "info": [
+            {
+              "rule": "Null check"
+            }
+          ]
+        },
+        "Accuracy": {
+          "value": "100.00",
+          "info": [
+            {
+              "rule": "Duplicate count check"
+            }
+          ]
+        },
+        "Validity": {
+          "value": "100.00",
+          "info": [
+            {
+              "rule": "Formula check",
+              "rulevalue": "pclass>=3"
+            },
+            {
+              "rule": "Formula check",
+              "rulevalue": "pclass<9"
+            }
+          ]
+        },
+        "Timeliness": {
+          "value": "100.00",
+          "info": [
+            {
+              "rule": "Duplicate count check"
+            }
+          ]
+        },
+        "Consistenecy": {
+          "value": "100.00",
+          "info": [
+            {
+              "rule": "Duplicate count check"
+            }
+          ]
+        }
+      }
+    }
+  }

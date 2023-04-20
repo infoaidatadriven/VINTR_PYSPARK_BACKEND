@@ -1,0 +1,21 @@
+{
+    "schema": "SYSTEM",
+    "tables": {
+        "0":{
+            "TABLE_NAME": "REDO_DB",
+            "OWNER": "SYSTEM"
+        },
+        "1": {
+            "TABLE_NAME": "REDO_LOG",
+            "OWNER": "SYSTEM"
+        },
+        "2": {
+            "TABLE_NAME": "RETAIL_DATA",
+            "OWNER": "SYSTEM"
+        },
+        "3": {
+            "TABLE_NAME": "RETAIL_DATAINPUT",
+            "OWNER": "SYSTEM"
+        }
+    }
+}

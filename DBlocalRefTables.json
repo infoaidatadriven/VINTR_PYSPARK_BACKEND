@@ -1,0 +1,60 @@
+{
+    "tables": [
+      {
+        "type": "Global_RefData",
+        "db": "Common",
+        "collection": "Gender",
+        "availablecolumns": [ "index", "Gender", "Symbol" ],
+        "createdAt": "2021-10-11 17:32:01.952745"
+      },
+      {
+        "type": "Global_RefData",
+        "db": "Finance",
+        "collection": "nyse_stocks",
+        "availablecolumns": [ "index", "Symbol", "Name", "Last Sale", "Net Change", "% Change", "Market Cap", "Country", "IPO Year", "Volume", "Sector", "Industry" ],
+        "createdAt": "2021-10-11 17:33:09.045633"
+      },
+      {
+        "type": "Global_RefData",
+        "db": "Finance",
+        "collection": "nse_stocks",
+        "availablecolumns": [ "index", "SYMBOL", "NAME OF COMPANY", "SERIES", "DATE OF LISTING", "PAID UP VALUE", "MARKET LOT", "ISIN NUMBER", "FACE VALUE" ],
+        "createdAt": "2021-10-11 17:33:22.453057"
+      },
+      {
+        "type": "Global_RefData",
+        "db": "Finance",
+        "collection": "global_exchanges",
+        "availablecolumns": [ "index", "Bloomberg Exchange Code", "Bloomberg Composite Code", "Country", "Description", "ISO MIC", "Google Prefix", "EOD code", "# of Stocks" ],
+        "createdAt": "2021-10-11 17:33:37.130472"
+      },
+      {
+        "type": "Global_RefData",
+        "db": "Finance",
+        "collection": "nasdaq_stocks",
+        "availablecolumns": [ "index", "Symbol", "Name", "Last Sale", "Net Change", "% Change", "Market Cap", "Country", "IPO Year", "Volume", "Sector", "Industry" ],
+        "createdAt": "2021-10-11 17:33:52.973272"
+      },
+      {
+        "type": "Global_RefData",
+        "db": "GeoData",
+        "collection": "worldCities",
+        "availablecolumns": [ "index", "city", "country", "lat", "lng", "short_iso", "long_iso", "population" ],
+        "createdAt": "2021-10-11 17:34:11.735138"
+      },
+      {
+        "type": "Global_RefData",
+        "db": "Travel",
+        "collection": "airportCodes",
+        "availablecolumns": [ "index", "ident", "type", "name", "elevation_ft", "continent", "iso_country", "iso_region", "municipality", "gps_code", "iata_code", "local_code", "coordinates" ],
+        "createdAt": "2021-10-11 17:34:30.687044"
+      },
+      {
+        "type": "Global_RefData",
+        "db": "Travel",
+        "collection": "seaportCodes",
+        "availablecolumns": [ "index", "latitude", "longitude", "name", "country", "refcode" ],
+        "createdAt": "2021-10-11 17:34:39.574275"
+      }
+    ]
+  }
