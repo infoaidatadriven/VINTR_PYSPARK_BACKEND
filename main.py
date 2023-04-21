@@ -62,13 +62,13 @@ def get_length():
 
     return results
 
-# @app.route('/api/frequency', methods=['GET'])
-# def frequencies():
-#     for column in df.columns:
-#         frequency_df = df.groupBy(column).count()
-#         values=print(f"Frequency of values in column '{column}':")
-#         frequency_df.show()
-#         return values
+@app.route("/api/frequency", methods=['GET'])
+def frequencies():
+    result = {}
+    for column in df.columns:
+        frequency_df = df.groupBy(col(column)).count()
+        result[column] = frequency_df.collect()
+    return result
 
 
 if __name__ == '__main__':
