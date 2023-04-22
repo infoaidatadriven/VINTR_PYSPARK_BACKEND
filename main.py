@@ -5,8 +5,8 @@ import pyspark.sql.functions as F
 from pyspark.sql.types import FloatType
 from pyspark.sql.functions import min, max, avg, mean, length, col, count, corr, countDistinct, isnan, when, concat_ws
 from datetime import datetime
-from flask import Flask
 from flask import Flask, request, render_template, send_from_directory, jsonify
+
 
 app = Flask(__name__)
 
@@ -41,7 +41,7 @@ def profile():
     mean_value = [df.select(F.mean(column)).collect()[0][0] for column in df.columns] 
 
     values = null_value,min_value,max_value,avg_value,mean_value
-    return [values]
+    return jsonify(values)
 
 @app.route('/api/length', methods=['GET'])
 def get_length():
@@ -60,7 +60,7 @@ def get_length():
         }
         results.append(result)
 
-    return results
+    return jsonify(results)
 
 @app.route("/api/frequency", methods=['GET'])
 def frequencies():
@@ -68,7 +68,38 @@ def frequencies():
     for column in df.columns:
         frequency_df = df.groupBy(col(column)).count()
         result[column] = frequency_df.collect()
-    return result
+    return jsonify(result)
+
+# @app.route("/api/correlation", methods=['GET'])
+# def calculate_correlations():
+#     # Select only columns with numeric data types
+#     numeric_cols = [col_name for col_name, col_type in df_copy.dtypes
+#                     if isinstance(col_type, (FloatType, IntegerType, DoubleType))]
+#
+#     # Convert selected columns to float data type
+#     for col_name in numeric_cols:
+#         dff = df_copy.withColumn(col_name, F.col(col_name).cast("float"))
+#
+#     # Calculate the correlation value of each column with all other columns
+#     correlations = {}
+#     for col_name in numeric_cols:
+#         if col_name != "id":
+#             corr_values = {}
+#             for other_col in numeric_cols:
+#                 if other_col != col_name:
+#                     corr_val = df.stat.corr(col_name, other_col)
+#                     corr_values[other_col] = corr_val
+#             correlations[col_name] = corr_values
+#
+#     # Create a Pandas DataFrame to display the correlation values
+#     correlation_dff = pd.DataFrame(correlations)
+#     correlation_dff.index.name = "Column"
+#     correlation_dff = correlation_dff.stack().reset_index()
+#     correlation_dff.columns = ["Column 1", "Column 2", "Correlation Value"]
+#
+#     # Convert the DataFrame to a dictionary and return it
+#     return correlation_dff.to_dict(orient="records")
+
 
 
 if __name__ == '__main__':
