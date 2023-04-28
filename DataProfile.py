@@ -31,6 +31,13 @@ from sklearn import linear_model
 import pickle
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 import collections
+import findspark
+findspark.init()
+from pyspark.sql import SparkSession
+import pyspark.sql.functions as F
+from pyspark.sql.functions import col, length, min, max, avg, mean, count
+from pyspark.sql.functions import col, count, when, isnan, min, max, mean, stddev, approx_count_distinct, length
+import numpy as np
 
 DataProfile = Blueprint('DataProfile',__name__)
 
@@ -340,11 +347,226 @@ def getmaxuploadId_profile(sourceUploadlist,sourceId):
     dli2 = [int(s) for s in IDList]
     return (str(max(dli2)))
 
-@DataProfile.route('/api/profile', methods=['POST']) #GET requests will be blocked
-def profileAnalysis():
+@DataProfile.route('/api/profile1', methods=['POST']) #GET requests will be blocked
+def profileAnalysis1():
     content = request.get_json()
     sourcepath= content['sourcepath']
+    spark = SparkSession.builder.appName('CSV to JSON').getOrCreate()
+    df = spark.read.csv(sourcepath, header=True, inferSchema=True)
 
+
+    # Get the number of records in the DataFrame
+    num_records = df.count()
+
+    # Get the number of columns in the DataFrame
+    num_columns = len(df.columns)
+
+    # Get the data type of each column
+    column_data_types = [(column, str(data_type)) for column, data_type in df.dtypes]
+
+    columns = df.columns
+    input_dict = {"profile": []}
+
+    for column in columns:
+        num_records = df.count()
+        num_duplicates = df.select(column).distinct().count() - df.select(column).count()
+        data_type = str(df.schema[column].dataType)
+        null_records = df.filter(df[column].isNull()).count()
+        lengths = df.select([length(col(c)).alias(c) for c in df.columns])
+        lengths = lengths.fillna(0)
+        for c in lengths.columns:
+            lengths = lengths.withColumn(c, col(c).cast("int"))
+        length_stats = lengths.agg(
+            *[min(c).alias("Min_" + c) for c in lengths.columns],
+            *[max(c).alias("Max_" + c) for c in lengths.columns],
+            *[avg(c).alias("Average_" + c) for c in lengths.columns]
+        )
+        medians = np.median(lengths.toPandas(), axis=0)
+        median_stats = dict(zip(lengths.columns, medians))
+        freq_dict = {}
+        freq_counts = df.groupBy(column).agg(count("*").alias("count"))
+        unique_values = [row[column] for row in freq_counts.collect()]
+        counts = [row["count"] for row in freq_counts.collect()]
+        freq_dict[column] = {"unique_values": unique_values}
+
+        alpha_cols = [col_name for col_name, col_type in df.dtypes if col_type == "string"]
+        mask = {}
+        for col_name in alpha_cols:
+            mask[col_name] = df.groupBy(col_name).agg(count("*").alias("count")).collect()
+
+        profile = [{
+            "nr_duplicates": num_duplicates,
+            "nr_totalrecords": num_records,
+            "nr_totalcols": num_columns,
+            "column": column,
+            "attributeSummary": {
+                "records": num_records,
+                "dataType": data_type,
+                "null_records": null_records,
+                "outliers": 0,
+                "duplicates": num_duplicates,
+                "invalid": 0
+            },
+            "valueStatics":
+                {
+                    "MinimumValue": df.select(F.min(column)).collect()[0][0],
+                    "MinValLength": int(length_stats.first()["Min_" + column]),
+                    "MaximumValue": df.select(F.max(column)).collect()[0][0],
+                    "MaxValLength": int(length_stats.first()["Max_" + column]),
+                    "MeanValue": df.select(F.mean(column)).collect()[0][0],
+                    "MedianValue": df.select(F.avg(column)).collect()[0][0],
+                    "UniqueValuesCount": 0,
+                    "Std_Dev": 0
+                },
+            "LengthStatistics":
+                {
+                    "Min": int(length_stats.first()["Min_" + column]),
+                    "Max": int(length_stats.first()["Max_" + column]),
+                    "Average": round(length_stats.first()["Average_" + column], 2),
+                    "Median": int(median_stats[column])
+                },
+            "frequncyAnalysis":
+                {
+                    "unique_values": freq_dict,
+                    "counts": counts
+                },
+            "patternAnalysis": [],
+            "maskAnalysis": mask,
+            "staticalAnalysis":
+                {
+                    "Count": 0,
+                    "NullCount": 0,
+                    "UniqueValuesCount": 0,
+                    "MinimumValue": 0,
+                    "MeanValue": 0,
+                    "MedianValue": 0,
+                    "MaximumValue": 0,
+                    "Std_Dev": 0,
+                    "minLength": 0,
+                    "MaxLength": 0,
+                    "MeanLength": 0,
+                    "MedianLength": 0,
+                    "Data Type": "",
+                    "suggested_dtype": ""
+                },
+            "outliersList": [],
+            "outliersPercent":
+                {
+                    "outliers": 0,
+                    "normal": 0
+                },
+            "isFrequencyChart": "",
+            "correlaionSummary":
+                {
+                    "positiveSummary":
+                        [
+                            {
+                                "column": "",
+                                "value": ""
+                            }
+                        ],
+                    "negativeSummary": []
+                },
+            "datacatalogue": [
+                {
+                    "Column": "",
+                    "id": "",
+                    "BusinessTerm": "",
+                    "Definition": "",
+                    "Classification": "",
+                    "DataDomain": "",
+                    "RelatedTerms": "",
+                    "RelatedSource": "",
+                    "RelatedReports": "",
+                    "DataOwners": "",
+                    "DataUsers": "",
+                    "RelatedTags": "",
+                    "datalineage": [
+                        {
+                            "LineageName": "",
+                            "Details": {
+                                "name": "",
+                                "type": "",
+                                "id": "",
+                                "metaData": [
+                                    {
+                                        "column": "",
+                                        "id": "",
+                                        "BusinessTerm": ""
+                                    }
+                                ]
+                            }
+                        },
+
+                    ]
+                }
+            ],
+            "dq": {
+                "ColumnName": "",
+                "detail": {
+                    "Completeness": {
+                        "value": "",
+                        "info": [
+                            {
+                                "rule": "",
+                                "OutlierCount": ""
+                            }
+                        ]
+                    },
+                    "Validity": {
+                        "value": "",
+                        "info": [
+                            {
+                                "rule": "DataType match check (DataType : Numeric) ",
+                                "OutlierCount": "0"
+                            },
+                            {
+                                "rule": "Length check (Min Length should be 3) ",
+                                "OutlierCount": "0"
+                            },
+                            {
+                                "rule": "Length check (Max Length should be 4) ",
+                                "OutlierCount": "0"
+                            }
+                        ]
+                    },
+                    "Consistenecy": {
+                        "value": "",
+                        "info": [
+                            {
+                                "rule": "No Rules Executed",
+                                "OutlierCount": "0"
+                            }
+                        ]
+                    },
+                    "Timeliness": {
+                        "value": "",
+                        "info": [
+                            {
+                                "rule": "file reception frequency check",
+                                "OutlierCount": "0"
+                            }
+                        ]
+                    },
+                    "Accuracy": {
+                        "value": "",
+                        "info": [
+                            {
+                                "rule": "No Rules executed",
+                                "OutlierCount": "0"
+                            }
+                        ]
+                    }
+                },
+                "overall": ""
+            }
+        },
+        ],
+        # "nr_duplicates",
+        # "nr_totalrecords",
+        # "nr_totalcols",
+
+        input_dict["profile"].append(profile)
     outputdata = json.load(open("ProfileResults.json","r"))
     OAnalysisList=  outputdata['Results']
     outputResData={}
@@ -362,7 +584,7 @@ def profileAnalysis():
             # jsonString = json.dumps(eachitem["results"], default=str)
             # return jsonString
     df = df_from_path_profile(sourcepath)
-    
+
     selectedColumns=  list(df.columns.values)
     df_meta = pd.DataFrame(df.dtypes).reset_index()
     df_meta.columns = ["column_name", "dtype"]
@@ -387,7 +609,7 @@ def profileAnalysis():
     c=savequlaitychecktodb(qualityresult,sourcepath)
     for k in selectedColumns:
         catalogueresult =  [x for x in catalogueresults if x['Column'] ==k]
-        
+
         if k in conFeat:
             df_describe_continuous={}
             if (df[k].nunique()!=0):
@@ -397,19 +619,19 @@ def profileAnalysis():
                 df_describe_continuous['correlationSummary']=ResMatrix
                 dcatres=[]
                 for eachresult in catalogueresult:
-                   
+
                    eachresult['datalineage']=dataLineageforcolumn(k)
                    dcatres.append(eachresult)
                 df_describe_continuous['datacatalogue']=dcatres
-                df_describe_continuous['dq']=[x for x in qualityresult if x['ColumnName'] ==k][0]   
+                df_describe_continuous['dq']=[x for x in qualityresult if x['ColumnName'] ==k][0]
                 dqvalidityResult= [x for x in qualityresult if x['ColumnName'] ==k][0]
-                outliervalidity=0 
+                outliervalidity=0
                 for y in dqvalidityResult['detail']['Validity']['info']:
                     outliervalidity=outliervalidity+int(y['OutlierCount'])
                 att=df_describe_continuous['attributeSummary']
-                
+
                 att['invalid'] =outliervalidity
-                df_describe_continuous['attributeSummary']=att    
+                df_describe_continuous['attributeSummary']=att
             ListResult.append(df_describe_continuous)
         if k in catFeat:
             df_describe_categorical={}
@@ -421,7 +643,7 @@ def profileAnalysis():
                 ResMatrix=sorted_corr_matrix_per_col(CateoricalCorrMatrix,k)
                 # print("\n df_describe_categorical:",df_describe_categorical)
                 df_describe_categorical['correlationSummary'] = ResMatrix
-                
+
                 dcatres=[]
                 for eachresult in catalogueresult:
                    print(k)
@@ -429,7 +651,7 @@ def profileAnalysis():
                    eachresult['datalineage']=dataLineageforcolumn(k)
                    dcatres.append(eachresult)
                 df_describe_categorical['datacatalogue']=dcatres
-                df_describe_categorical['dq']=[x for x in qualityresult if x['ColumnName'] ==k][0]  
+                df_describe_categorical['dq']=[x for x in qualityresult if x['ColumnName'] ==k][0]
             ListResult.append(df_describe_categorical)
         if k in dateFeat:
             df_describe_datetime = forDateTimeType(k, df)
@@ -440,7 +662,7 @@ def profileAnalysis():
                    eachresult['datalineage']=dataLineageforcolumn(k)
                    dcatres.append(eachresult)
             df_describe_datetime ['datacatalogue']=dcatres
-            df_describe_datetime ['dq']=[x for x in qualityresult if x['ColumnName'] ==k][0]  
+            df_describe_datetime ['dq']=[x for x in qualityresult if x['ColumnName'] ==k][0]
             ListResult.append(df_describe_datetime)
     resdata={}
     resdata['profile'] = ListResult
@@ -450,14 +672,14 @@ def profileAnalysis():
     resdata['nr_totalcols']=len(df.columns)
     inputdata = json.load(open("ProfileResults.json","r"))
     AnalysisList=  inputdata['Results']
-    
+
     content['sourcepath']= sourcepath
     prId=getDBProfileId()
     content['results']="PR_"+prId
     content['ProfileRID']=prId
     AnalysisList.append(content)
     inputdata['Results'] = AnalysisList
-    
+
     saveResultsets(resdata,"PR_"+prId)
     json.dump(inputdata, open("ProfileResults.json","w"), default=str)
     jsonString = json.dumps(resdata, default=str)

@@ -35,7 +35,7 @@ from MDM import editRulesetmdmglobal,getlistfromMDBglobal,CreateRulesetmdm_globa
 from dataLineage import EntryDataLineage ,dataLineageforcolumn       
 from Datacatlog import getcatalogue,editDatacatalogue,createDatacatalogue,getcatalogueforcolumns
 from dataQuality import checkQuality,checkDataQuality,savequlaitychecktodb
-from reports import reports
+#from reports import reports
 ## ML related libraries
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import StandardScaler
@@ -62,7 +62,8 @@ from DataProfile import DataProfile
 
 from DataClean import DataClean
 from module_dqm import module_dqm
-from common_PC_Function import * 
+from common_PC_Function import *
+from profile_api import profile_api
 
 import csv
 from module_plot import *
@@ -81,7 +82,8 @@ app.register_blueprint(DataProfile)
 
 app.register_blueprint(DataClean)
 app.register_blueprint(module_dqm)
-app.register_blueprint(reports)
+app.register_blueprint(profile_api)
+#app.register_blueprint(reports)
 CORS(app)
 app.config['UPLOAD_EXTENSIONS'] = ['.csv', '.xlsx', '.xls', '.json', '.xml']
 app.config['MAX_CONTENT_LENGTH'] = 10000* 1024 * 1024
