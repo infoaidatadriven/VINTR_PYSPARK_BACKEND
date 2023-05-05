@@ -7,8 +7,8 @@ from pyspark.sql import SparkSession
 import json
 
 import pyspark.sql.functions as F
-from pyspark.sql.functions import col, length, min, max, avg, mean, count
-from pyspark.sql.functions import col, count, when, isnan, min, max, mean, stddev, approx_count_distinct, length, approx_count_distinct, stddev
+from pyspark.sql.functions import col, length, min, max, avg, mean, count, struct
+from pyspark.sql.functions import col, count, when, isnan, min, max, mean, stddev, to_json, collect_list, approx_count_distinct, explode, length, approx_count_distinct, stddev, concat_ws
 import numpy as np
 
 from pyspark.sql.types import FloatType
@@ -58,6 +58,13 @@ def profile():
     input_dict['nr_totalrecords'] = num_records
     input_dict['nr_totalcols'] = num_columns
 
+    row_string = concat_ws(",", *df.columns)
+    df_with_row_string = df.withColumn("row_string", row_string)
+    duplicates = df_with_row_string.groupBy("row_string").agg(count("*").alias("count")).filter(
+        "count > 1").count()
+
+
+
     ListResult = []
 
     selectedColumns = list(df.columns)
@@ -85,7 +92,8 @@ def profile():
 
 
 
-        #num_duplicates = df.select(column).distinct().count() - df.select(column).count()
+        num_duplicates = duplicates
+        print(num_duplicates)
         null_records = df.filter(df[column].isNull()).count()
         data_type = str(df.schema[column].dataType)
         unique_values_count = df.select(approx_count_distinct(column)).first()[0]
@@ -104,15 +112,20 @@ def profile():
         medians = np.median(lengths.toPandas(), axis=0)
         median_stats = dict(zip(lengths.columns, medians))
 
+        frequency_analysis = df.groupBy(column).agg(count("*").alias("count")).orderBy(col("count").desc())
+        json_freq = frequency_analysis.toJSON().collect()
+        print(json_freq)
 
 
-        attributeSummary['duplicates'] = 0
+
+        attributeSummary['duplicates'] = num_duplicates
         attributeSummary['null_records'] = null_records
         attributeSummary['records'] = num_records
         attributeSummary['outliers'] = 0
         attributeSummary['invalid'] = 0
 
-        frequencyAnalysis['frequencyAnalysis'] = []
+        frequencyAnalysis['frequencyAnalysis'] = json_freq
+        print(frequency_analysis)
         details['frequencyAnalysis'] = frequencyAnalysis
 
         maskAnalysis['maskAnalysis'] = []
