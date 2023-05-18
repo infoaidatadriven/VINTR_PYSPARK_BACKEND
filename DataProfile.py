@@ -31,8 +31,6 @@ from sklearn import linear_model
 import pickle
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 import collections
-import findspark
-findspark.init()
 from pyspark.sql import SparkSession
 import pyspark.sql.functions as F
 from pyspark.sql.functions import col, length, min, max, avg, mean, count

@@ -1,8 +1,9 @@
-import findspark
+# import findspark
+from pyspark.shell import spark
 
 from Datacatlog import getcatalogueforcolumns
 
-findspark.init()
+# findspark.init()
 from pyspark.sql import SparkSession
 import json
 
@@ -22,7 +23,9 @@ from dataQuality import checkQuality,checkDataQuality,savequlaitychecktodb
 #app = Flask(__name__, static_folder='static', template_folder='static')
 profile_api = Blueprint('profile_api',__name__)
 
-spark = SparkSession.builder.appName('CSV to JSON').getOrCreate()
+
+
+
 
 
 # @app.route("/")
@@ -70,9 +73,16 @@ def profile():
     selectedColumns = list(df.columns)
     catalogueresults=getcatalogueforcolumns(selectedColumns)
     print("Starting the qulaity check")
-    #qualityresult = checkDataQuality(df.head(1000), selectedColumns)
+    # qualityresult = checkDataQuality(df.head(1000), selectedColumns)
     print("completed the qulaity check")
-    #c = savequlaitychecktodb(qualityresult, sourcepath)
+    # c = savequlaitychecktodb(qualityresult, sourcepath)
+    # null_counts = df.select(*(sum(col(c).isNull().cast("int")).alias(c) for c in df.columns))
+    #
+    # total_null_counts = 0
+    #
+    # for row in null_counts.collect():
+    #     for col_name in null_counts.columns:
+    #         total_null_counts += row[col_name]
 
     print(selectedColumns)
 
@@ -115,6 +125,8 @@ def profile():
         frequency_analysis = df.groupBy(column).agg(count("*").alias("count")).orderBy(col("count").desc())
         json_freq = frequency_analysis.toJSON().collect()
         print(json_freq)
+
+
 
 
 
@@ -211,6 +223,8 @@ def profile():
         details['attributeSummary'] = attributeSummary
         ListResult.append(details)
     input_dict['profile'] = ListResult
+
+
 
     # Print the input_dict containing the profile information
     jsonString = json.dumps(input_dict, default=str)
