@@ -1,51 +1,70 @@
-# import findspark
-from pyspark.shell import spark
+# Importing flask and base functions
 
-from Datacatlog import getcatalogueforcolumns
-
-# findspark.init()
-from pyspark.sql import SparkSession
+import os
 import json
-
-import pyspark.sql.functions as F
-from pyspark.sql.functions import col, length, min, max, avg, mean, count, struct
-from pyspark.sql.functions import col, count, when, isnan, min, max, mean, stddev, to_json, collect_list, approx_count_distinct, explode, length, approx_count_distinct, stddev, concat_ws
 import numpy as np
-
-from pyspark.sql.types import FloatType
 from datetime import datetime
-from flask import Flask,Blueprint, request, render_template, send_from_directory, jsonify
-from dataLineage import EntryDataLineage ,dataLineageforcolumn
-from dataQuality import checkQuality,checkDataQuality,savequlaitychecktodb
+from flask import Flask, Blueprint, request, render_template, send_from_directory, jsonify
+from dataLineage import EntryDataLineage, dataLineageforcolumn
+from dataQuality import checkQuality, checkDataQuality, savequlaitychecktodb
 
+# Importing pyspark functions
 
+from pyspark import SparkConf
+from pyspark.shell import spark
+from pyspark.sql import SparkSession
+import pyspark.sql.functions as F
+from pyspark.sql.functions import col, count, when, isnan, length, min, max, avg, mean, count, struct
+from pyspark.sql.functions import stddev, to_json, collect_list, approx_count_distinct, explode, length, \
+    approx_count_distinct, stddev, concat_ws
+from Datacatlog import getcatalogueforcolumns
+from pyspark.sql.types import FloatType
 
-#app = Flask(__name__, static_folder='static', template_folder='static')
-profile_api = Blueprint('profile_api',__name__)
+# converting this file as BluePrint to route in app.py and make it executable
 
+profile_api = Blueprint('profile_api', __name__)
 
-
-
-
-
-# @app.route("/")
-# def helloWorld():
-#   return render_template('index.html')
-#
-# @app.route("/static/")
-# def helloWorld1():
-#   return render_template('index.html')
-# @app.route("/", methods=['GET'])
-# def home():
-#     return ("Pyspark ")
 
 @profile_api.route("/api/profile", methods=['POST'])
 def profile():
+    class Connector:
+        def __init__(self):
+            self.spark_session = self.get_spark_session()
+
+        @staticmethod
+        def _get_spark_config():
+            spark_config = SparkConf()
+            spark_config.set('fs.s3a.acl.default', 'BucketOwnerFullControl')
+            spark_config.set('fs.s3a.canned.acl', 'BucketOwnerFullControl')
+            spark_config.set('spark.serializer', 'org.apache.spark.serializer.KryoSerializer')
+            spark_config.set('hive.exec.dynamic.partition', 'true')
+            spark_config.set('hive.exec.dynamic.partition.mode', 'nonstrict')
+            spark_config.set('spark.sql.sources.partitionOverwriteMode', 'dynamic')
+            spark_config.set('spark.io.compression.codec', 'snappy')
+            spark_config.set('spark.shuffle.compress', 'true')
+            spark_config.set('spark.scheduler.mode', 'FAIR')
+            spark_config.set('spark.speculation', 'false')
+            spark_config.set("spark.hadoop.hive.metastore.uris",
+                             "thrift://hive-metastore-metastore.hms.svc.cluster.local:9083")
+            spark_config.set("spark.sql.parquet.enableVectorizedReader", "false")
+            spark_config.set("spark.hadoop.mapreduce.fileoutputcommitter.algorithm.version", "2")
+            spark_config.set("spark.sql.parquet.fs.optimized.committer.optimization-enabled", "true")
+            spark_config.set("spark.hadoop.fs.s3a.experimental.input.fadvise", "sequential")
+            spark_config.set("spark.eventlog.enabled", "true")
+            spark_config.set("spark.logConf", "true")
+
+            shuffle_partitions = os.getenv("shuffle_partitions", "")
+            if shuffle_partitions != "":
+                spark_config.set("spark.sql.shuffle.partitions", shuffle_partitions)
+
+            return spark_config
 
     content = request.get_json()
     sourcepath = content['sourcepath']
     df = spark.read.csv(sourcepath, header=True, inferSchema=True)
+
     # Get the number of records in the DataFrame
+
     num_records = df.count()
 
     # Get the number of columns in the DataFrame
@@ -53,8 +72,6 @@ def profile():
 
     # Get the data type of each column
     column_data_types = [(column, str(data_type)) for column, data_type in df.dtypes]
-
-
 
     columns = df.columns
     input_dict = {"profile": []}
@@ -66,12 +83,10 @@ def profile():
     duplicates = df_with_row_string.groupBy("row_string").agg(count("*").alias("count")).filter(
         "count > 1").count()
 
-
-
     ListResult = []
-
+    #
     selectedColumns = list(df.columns)
-    catalogueresults=getcatalogueforcolumns(selectedColumns)
+    catalogueresults = getcatalogueforcolumns(selectedColumns)
     print("Starting the qulaity check")
     # qualityresult = checkDataQuality(df.head(1000), selectedColumns)
     print("completed the qulaity check")
@@ -100,10 +115,8 @@ def profile():
         correlationSummary = {}
         dq = {}
 
-
-
         num_duplicates = duplicates
-        print(num_duplicates)
+        # print(num_duplicates)
         null_records = df.filter(df[column].isNull()).count()
         data_type = str(df.schema[column].dataType)
         unique_values_count = df.select(approx_count_distinct(column)).first()[0]
@@ -119,16 +132,12 @@ def profile():
             *[avg(c).alias("Average_" + c) for c in lengths.columns]
         )
         mean_length = df.select(mean(length(column))).first()[0]
-        medians = np.median(lengths.toPandas(), axis=0)
-        median_stats = dict(zip(lengths.columns, medians))
+        # medians = np.median(lengths.toPandas(), axis=0)
+        # median_stats = dict(zip(lengths.columns, medians))
 
         frequency_analysis = df.groupBy(column).agg(count("*").alias("count")).orderBy(col("count").desc())
         json_freq = frequency_analysis.toJSON().collect()
-        print(json_freq)
-
-
-
-
+        # print(json_freq)
 
         attributeSummary['duplicates'] = num_duplicates
         attributeSummary['null_records'] = null_records
@@ -137,7 +146,7 @@ def profile():
         attributeSummary['invalid'] = 0
 
         frequencyAnalysis['frequencyAnalysis'] = json_freq
-        print(frequency_analysis)
+        # print(frequency_analysis)
         details['frequencyAnalysis'] = frequencyAnalysis
 
         maskAnalysis['maskAnalysis'] = []
@@ -159,14 +168,11 @@ def profile():
         dq['dq'] = 0
         details['dq'] = dq
 
-
         LengthStatics['Min'] = int(length_stats.first()["Min_" + column])
         LengthStatics['Max'] = int(length_stats.first()["Max_" + column])
         LengthStatics['Average'] = round(length_stats.first()["Average_" + column], 2)
-        LengthStatics['Median'] = int(median_stats[column])
+        # LengthStatics['Median'] = int(median_stats[column])
         details['LengthStatics'] = LengthStatics
-
-
 
         staticalAnalysis['count'] = num_records
         staticalAnalysis['Nullcount'] = null_records
@@ -179,26 +185,20 @@ def profile():
         staticalAnalysis['minLength'] = int(length_stats.first()["Min_" + column])
         staticalAnalysis['maxLength'] = int(length_stats.first()["Max_" + column])
         staticalAnalysis['MeanLength'] = mean_length
-        staticalAnalysis['MedianLength'] = int(median_stats[column])
+        # staticalAnalysis['MedianLength'] = int(median_stats[column])
         staticalAnalysis['Data Type'] = data_type
         staticalAnalysis['suggested_dtype'] = ""
         details['staticAnalysis'] = staticalAnalysis
 
+        # catalogueresult = [x for x in catalogueresults if x['Column'] == column]
+        # dcatres = []
+        # for eachresult in catalogueresult:
+        #     eachresult['datalineage'] = dataLineageforcolumn(column)
+        #     dcatres.append(eachresult)
+        # details['datacatalogue'] = dcatres
+        # #details['dq'] = [x for x in qualityresult if x['ColumnName'] == column][0]
 
-
-
-
-        catalogueresult = [x for x in catalogueresults if x['Column'] == column]
-        dcatres = []
-        for eachresult in catalogueresult:
-            eachresult['datalineage'] = dataLineageforcolumn(column)
-            dcatres.append(eachresult)
-        details['datacatalogue'] = dcatres
-        #details['dq'] = [x for x in qualityresult if x['ColumnName'] == column][0]
-
-
-
-        if (data_type=="IntegerType()"  or data_type=="DoubleType()"):
+        if (data_type == "IntegerType()" or data_type == "DoubleType()"):
             details['column'] = column
             attributeSummary['dataType'] = "Numeric"
             valueStatistics["MinimumValue"] = df.select(F.min(column)).collect()[0][0]
@@ -211,20 +211,16 @@ def profile():
             valueStatistics["Std_Dev"] = std_dev
             details['valueStatistics'] = valueStatistics
 
-
-
-        if (data_type=="datetime64[ns]" or data_type=="datetime"):
-            details['column']=column
+        if (data_type == "datetime64[ns]" or data_type == "datetime"):
+            details['column'] = column
             attributeSummary['dataType'] = "Alphabetic"
-        if (data_type=="StringType()"):
-            details['column']=column
+        if (data_type == "StringType()"):
+            details['column'] = column
             attributeSummary['dataType'] = "Alphanumeric"
 
         details['attributeSummary'] = attributeSummary
         ListResult.append(details)
     input_dict['profile'] = ListResult
-
-
 
     # Print the input_dict containing the profile information
     jsonString = json.dumps(input_dict, default=str)
