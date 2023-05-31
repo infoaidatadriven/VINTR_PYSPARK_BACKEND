@@ -64,14 +64,10 @@ def profile():
     df = spark.read.csv(sourcepath, header=True, inferSchema=True)
 
     # Get the number of records in the DataFrame
-
     num_records = df.count()
 
     # Get the number of columns in the DataFrame
     num_columns = len(df.columns)
-
-    # Get the data type of each column
-    column_data_types = [(column, str(data_type)) for column, data_type in df.dtypes]
 
     columns = df.columns
     input_dict = {"profile": []}
@@ -84,22 +80,7 @@ def profile():
         "count > 1").count()
 
     ListResult = []
-    #
-    selectedColumns = list(df.columns)
-    catalogueresults = getcatalogueforcolumns(selectedColumns)
-    print("Starting the qulaity check")
-    # qualityresult = checkDataQuality(df.head(1000), selectedColumns)
-    print("completed the qulaity check")
-    # c = savequlaitychecktodb(qualityresult, sourcepath)
-    # null_counts = df.select(*(sum(col(c).isNull().cast("int")).alias(c) for c in df.columns))
-    #
-    # total_null_counts = 0
-    #
-    # for row in null_counts.collect():
-    #     for col_name in null_counts.columns:
-    #         total_null_counts += row[col_name]
 
-    print(selectedColumns)
 
     for column in columns:
         details = {}
@@ -116,7 +97,6 @@ def profile():
         dq = {}
 
         num_duplicates = duplicates
-        # print(num_duplicates)
         null_records = df.filter(df[column].isNull()).count()
         data_type = str(df.schema[column].dataType)
         unique_values_count = df.select(approx_count_distinct(column)).first()[0]
@@ -132,88 +112,99 @@ def profile():
             *[avg(c).alias("Average_" + c) for c in lengths.columns]
         )
         mean_length = df.select(mean(length(column))).first()[0]
-        # medians = np.median(lengths.toPandas(), axis=0)
-        # median_stats = dict(zip(lengths.columns, medians))
 
         frequency_analysis = df.groupBy(column).agg(count("*").alias("count")).orderBy(col("count").desc())
         json_freq = frequency_analysis.toJSON().collect()
-        # print(json_freq)
 
-        attributeSummary['duplicates'] = num_duplicates
-        attributeSummary['null_records'] = null_records
-        attributeSummary['records'] = num_records
-        attributeSummary['outliers'] = 0
-        attributeSummary['invalid'] = 0
+        def get_attributeSummary():
+            attributeSummary['duplicates'] = num_duplicates
+            attributeSummary['null_records'] = null_records
+            attributeSummary['records'] = num_records
+            attributeSummary['outliers'] = 0
+            attributeSummary['invalid'] = 0
+            return
 
-        frequencyAnalysis['frequencyAnalysis'] = json_freq
-        # print(frequency_analysis)
-        details['frequencyAnalysis'] = frequencyAnalysis
+        def get_frequencyAnalysis():
+            frequencyAnalysis['frequencyAnalysis'] = json_freq
+            details['frequencyAnalysis'] = frequencyAnalysis
+            return
 
-        maskAnalysis['maskAnalysis'] = []
-        details['maskAnalysis'] = maskAnalysis
+        def get_maskAnalysis():
+            maskAnalysis['maskAnalysis'] = []
+            details['maskAnalysis'] = maskAnalysis
+            return
 
-        patternAnalysis['patternAnalysis'] = []
-        details['patternAnalysis'] = patternAnalysis
+        def get_patternAnalysis():
+            patternAnalysis['patternAnalysis'] = []
+            details['patternAnalysis'] = patternAnalysis
+            return
 
-        outliersList['outliersList'] = []
-        details['outliersList'] = outliersList
+        def get_outliersList():
+            outliersList['outliersList'] = []
+            details['outliersList'] = outliersList
+            return
 
-        outliersPercent['outliersPercent'] = {}
-        details['outliersPercent'] = outliersPercent
+        def get_outliersPercent():
+            outliersPercent['outliersPercent'] = {}
+            details['outliersPercent'] = outliersPercent
+            return
 
-        correlationSummary['positiveSummary'] = 0
-        correlationSummary['negativeSummary'] = 0
-        details['correlationSummary'] = correlationSummary
+        def get_correlationSummary():
+            correlationSummary['positiveSummary'] = 0
+            correlationSummary['negativeSummary'] = 0
+            details['correlationSummary'] = correlationSummary
+            return
 
-        dq['dq'] = 0
-        details['dq'] = dq
+        def get_dq():
+            dq['dq'] = 0
+            details['dq'] = dq
+            return
 
-        LengthStatics['Min'] = int(length_stats.first()["Min_" + column])
-        LengthStatics['Max'] = int(length_stats.first()["Max_" + column])
-        LengthStatics['Average'] = round(length_stats.first()["Average_" + column], 2)
-        # LengthStatics['Median'] = int(median_stats[column])
-        details['LengthStatics'] = LengthStatics
+        def get_value_lengthStatics():
+            LengthStatics['Min'] = int(length_stats.first()["Min_" + column])
+            LengthStatics['Max'] = int(length_stats.first()["Max_" + column])
+            LengthStatics['Average'] = round(length_stats.first()["Average_" + column], 2)
+            # LengthStatics['Median'] = int(median_stats[column])
+            details['LengthStatics'] = LengthStatics
+            return
 
-        staticalAnalysis['count'] = num_records
-        staticalAnalysis['Nullcount'] = null_records
-        staticalAnalysis['UniqueValuesCount'] = unique_values_count
-        staticalAnalysis['MinimumValue'] = df.select(F.min(column)).collect()[0][0]
-        staticalAnalysis['MeanValue'] = df.select(F.mean(column)).collect()[0][0]
-        staticalAnalysis['MedianValue'] = df.select(F.avg(column)).collect()[0][0]
-        staticalAnalysis['MaximumValue'] = df.select(F.max(column)).collect()[0][0]
-        staticalAnalysis['Std_Dev'] = std_dev
-        staticalAnalysis['minLength'] = int(length_stats.first()["Min_" + column])
-        staticalAnalysis['maxLength'] = int(length_stats.first()["Max_" + column])
-        staticalAnalysis['MeanLength'] = mean_length
-        # staticalAnalysis['MedianLength'] = int(median_stats[column])
-        staticalAnalysis['Data Type'] = data_type
-        staticalAnalysis['suggested_dtype'] = ""
-        details['staticAnalysis'] = staticalAnalysis
-
-        catalogueresult = [x for x in catalogueresults if x['Column'] == column]
-        dcatres = []
-        for eachresult in catalogueresult:
-            eachresult['datalineage'] = dataLineageforcolumn(column)
-            dcatres.append(eachresult)
-        details['datacatalogue'] = dcatres
-        #details['dq'] = [x for x in qualityresult if x['ColumnName'] == column][0]
+        def get_lengthStatics():
+            staticalAnalysis['count'] = num_records
+            staticalAnalysis['Nullcount'] = null_records
+            staticalAnalysis['UniqueValuesCount'] = unique_values_count
+            staticalAnalysis['MinimumValue'] = df.select(F.min(column)).collect()[0][0]
+            staticalAnalysis['MeanValue'] = df.select(F.mean(column)).collect()[0][0]
+            staticalAnalysis['MedianValue'] = df.select(F.avg(column)).collect()[0][0]
+            staticalAnalysis['MaximumValue'] = df.select(F.max(column)).collect()[0][0]
+            staticalAnalysis['Std_Dev'] = std_dev
+            staticalAnalysis['minLength'] = int(length_stats.first()["Min_" + column])
+            staticalAnalysis['maxLength'] = int(length_stats.first()["Max_" + column])
+            staticalAnalysis['MeanLength'] = mean_length
+            # staticalAnalysis['MedianLength'] = int(median_stats[column])
+            staticalAnalysis['Data Type'] = data_type
+            staticalAnalysis['suggested_dtype'] = ""
+            details['staticAnalysis'] = staticalAnalysis
+            return
 
         if (data_type == "IntegerType()" or data_type == "DoubleType()"):
             details['column'] = column
             attributeSummary['dataType'] = "Numeric"
-            valueStatistics["MinimumValue"] = df.select(F.min(column)).collect()[0][0]
-            valueStatistics["MinValLength"] = int(length_stats.first()["Min_" + column])
-            valueStatistics["MaximumValue"] = df.select(F.max(column)).collect()[0][0]
-            valueStatistics["MaxValLength"] = int(length_stats.first()["Max_" + column])
-            valueStatistics["MeanValue"] = df.select(F.mean(column)).collect()[0][0]
-            valueStatistics["MedianValue"] = df.select(F.avg(column)).collect()[0][0]
-            valueStatistics["UniqueValuesCount"] = unique_values_count
-            valueStatistics["Std_Dev"] = std_dev
-            details['valueStatistics'] = valueStatistics
+            def get_valueStatics():
+                valueStatistics["MinimumValue"] = df.select(F.min(column)).collect()[0][0]
+                valueStatistics["MinValLength"] = int(length_stats.first()["Min_" + column])
+                valueStatistics["MaximumValue"] = df.select(F.max(column)).collect()[0][0]
+                valueStatistics["MaxValLength"] = int(length_stats.first()["Max_" + column])
+                valueStatistics["MeanValue"] = df.select(F.mean(column)).collect()[0][0]
+                valueStatistics["MedianValue"] = df.select(F.avg(column)).collect()[0][0]
+                valueStatistics["UniqueValuesCount"] = unique_values_count
+                valueStatistics["Std_Dev"] = std_dev
+                details['valueStatistics'] = valueStatistics
+                return
 
         if (data_type == "datetime64[ns]" or data_type == "datetime"):
             details['column'] = column
             attributeSummary['dataType'] = "Alphabetic"
+
         if (data_type == "StringType()"):
             details['column'] = column
             attributeSummary['dataType'] = "Alphanumeric"
@@ -222,18 +213,19 @@ def profile():
         ListResult.append(details)
     input_dict['profile'] = ListResult
 
-    # Print the input_dict containing the profile information
-    jsonString = json.dumps(input_dict, default=str)
-    return jsonString
+    attributeSummary = get_attributeSummary()
+    frequencyAnalysis = get_frequencyAnalysis()
+    maskAnalysis = get_maskAnalysis()
+    patternAnalysis = get_patternAnalysis()
+    outliersList = get_outliersList()
+    outliersPercent = get_outliersPercent()
+    correlationSummary = get_correlationSummary()
+    dq = get_dq()
+    lengthValueStatics = get_value_lengthStatics()
+    lengthStatics = get_lengthStatics()
+    valueStatistics = get_valueStatics()
 
-
-if __name__ == '__main__':
-    app.run(debug=True)
-
-
-
-
-
+    
 
 
 

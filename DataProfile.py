@@ -7,6 +7,8 @@ from dataLineage import EntryDataLineage ,dataLineageforcolumn
 from dataQuality import checkQuality,checkDataQuality,savequlaitychecktodb
 from CorrelationFunctions import compute_associations
 from common_PC_Function import *
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import col
 
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import StandardScaler
