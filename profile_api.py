@@ -151,19 +151,31 @@ def frequencyAnalysis(df):
     return frequency_Analysis 
 
 def getColumnDetail(df):
-    result = {}
+    result = []
 
     for column in df.columns:
-        result[column] = df.select(F.min(column).alias('min_value'),
-            F.max(column).alias('max_value'),
-            F.mean(column).alias('mean_value'),
-            F.avg(column).alias('avg_value'),
-            min(length(column)).alias('min_length'),
-            max(length(column)).alias('max_length'),
+        
+        detail = df.select(          
+            struct(F.min(column).alias('Min'),
+            F.max(column).alias('Max'),
+            F.mean(column).alias('Median'),
+            F.avg(column).alias('Average')).alias('LengthStatistics'),
+            struct(min(length(column)).alias('MinValLength'),
+            max(length(column)).alias('MaxValLength'),
             avg(length(column)).alias('avg_length'),
-            stddev(column).alias('std_dev'),
-            approx_count_distinct(column).alias('unique')).first()
-        #result[column]['dataType'] = df.schema[column].dataType
+            stddev(column).alias('Std_Dev'),
+            approx_count_distinct(column).alias('UniqueValuesCount')).alias('valueStatistics')).first().asDict(True)
+
+        detail['column'] = column       
+        detail['attributeSummary'] = {}
+        detail['attributeSummary']['dataType'] = 'Alphabetic'
+        detail['frequncyAnalysis'] = {}
+        detail['patternAnalysis'] = {}
+        detail['maskAnalysis'] = {}
+        detail['staticalAnalysis'] = {}
+        detail['correlationSummary'] = {}
+        detail['dq'] = {}
+        result.append(detail)
     return result
  
 if __name__ == '__main__' :
