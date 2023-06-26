@@ -56,17 +56,28 @@ class Connector:
 
             return spark_config
 
-@profile_api.route("/api/profile", methods=['POST'])
+@profile_api.route("/api/profile_pyspark", methods=['POST'])
 def profile():    
     content = request.get_json()
     sourcepath = content['sourcepath']
+    
+    if sourcepath is None :
+        sourcepath = 'F:/AIDataDriven/Data/Titanic01.csv'   
 
+    print('API Start :' , datetime.now())
+
+    startTime = datetime.now()    
     df = spark.read.csv(sourcepath, header=True, inferSchema=True)
+    # df = spark.read.parquet('D:/AI-Data-Driven/Documents/flights_10M.parquet')
+
+    print('API Read Completed:' , datetime.now())
 
     profileDetail = get_count(df)
-    profileDetail['profile'] = getColumnDetail(df)
-
+    #profileDetail = {}
+    profileDetail['profile'] = getColumnDetail(df)   
     jsonString = json.dumps(profileDetail, default=str)
+
+    print('API End :' , datetime.now(), datetime.now() - startTime)
     return jsonString
 
 def get_count(df):
@@ -150,36 +161,138 @@ def frequencyAnalysis(df):
     # print(frequency_Analysis)
     return frequency_Analysis 
 
+def lengthStatics(df):
+    for column in df.columns:
+        detail = df.agg(
+            struct(F.min(column).alias('Min'),
+                   F.max(column).alias('Max'),
+                   F.avg(column).alias('Average'),
+                   F.mean(column).alias('Median')).alias('LengthStatistics'),
+            struct(min(length(column).alias('MinValLength')),
+                   max(length(column)).alias('MaxValLength'),
+                   avg(length(column)).alias('avg_length'),
+                   stddev(column).alias('Std_Dev'),
+                   approx_count_distinct(column).alias('UniqueValuesCount')).alias('valueStatistics')).first().asDict(True)
+
+        # print(detail)
+    return detail
+
 def getColumnDetail(df):
     result = []
 
+    alphabetic_cols =   [col_name for col_name, data_type in df.dtypes if 
+                        data_type == "string" and df.select(col(col_name).rlike("[a-zA-Z]")).first()[0]]
+
     for column in df.columns:
         
-        detail = df.select(          
+        detailTime = datetime.now()
+        detail = df.select(
             struct(F.min(column).alias('Min'),
             F.max(column).alias('Max'),
-            F.mean(column).alias('Median'),
-            F.avg(column).alias('Average')).alias('LengthStatistics'),
-            struct(min(length(column)).alias('MinValLength'),
+            F.avg(column).alias('Average'),
+            F.mean(column).alias('Median')).alias('LengthStatistics'),
+            struct(min(length(column).alias('MinValLength')),
             max(length(column)).alias('MaxValLength'),
-            avg(length(column)).alias('avg_length'),
+            avg(length(column)).alias('avg_length'), 
             stddev(column).alias('Std_Dev'),
             approx_count_distinct(column).alias('UniqueValuesCount')).alias('valueStatistics')).first().asDict(True)
+        print('Frequency Start :' , column , datetime.now() - detailTime)
 
         detail['column'] = column       
         detail['attributeSummary'] = {}
         detail['attributeSummary']['dataType'] = 'Alphabetic'
-        detail['frequncyAnalysis'] = {}
-        detail['patternAnalysis'] = {}
-        detail['maskAnalysis'] = {}
-        detail['staticalAnalysis'] = {}
+
+        group_counts = df.groupBy(column).agg(count("*").alias("count")).head(15)
+        mask = []
+        frequency = []
+        patterns = []
+
+        for row in group_counts:
+            frequency.append({
+                'unique_values' : row[0],
+                'counts' : row[1]
+            })
+            if column in alphabetic_cols:
+                mask.append({
+                    'unique_values' : row[0],
+                    'counts' : row[1]
+                })
+                patterns.append({
+                    'unique_values' : row[0],
+                    'counts' : row[1]
+                })
+
+        detail['patternAnalysis'] = patterns
+        detail['maskAnalysis'] = mask
+        detail['frequncyAnalysis'] = frequency
+      
+        detail['staticalAnalysis'] = lengthStatics(df)
         detail['correlationSummary'] = {}
-        detail['dq'] = {}
+        detail['outliersPercent'] = {}
+        detail['dq'] =  {"ColumnName": "",
+                "detail": {
+                    "Completeness": {
+                        "value": "",
+                        "info": [
+                            {
+                                "rule": "",
+                                "OutlierCount": ""
+                            }
+                        ]
+                    },
+                    "Validity": {
+                        "value": "",
+                        "info": [
+                            {
+                                "rule": "DataType match check (DataType : Numeric) ",
+                                "OutlierCount": "0"
+                            },
+                            {
+                                "rule": "Length check (Min Length should be 3) ",
+                                "OutlierCount": "0"
+                            },
+                            {
+                                "rule": "Length check (Max Length should be 4) ",
+                                "OutlierCount": "0"
+                            }
+                        ]
+                    },
+                    "Consistenecy": {
+                        "value": "",
+                        "info": [
+                            {
+                                "rule": "No Rules Executed",
+                                "OutlierCount": "0"
+                            }
+                        ]
+                    },
+                    "Timeliness": {
+                        "value": "",
+                        "info": [
+                            {
+                                "rule": "file reception frequency check",
+                                "OutlierCount": "0"
+                            }
+                        ]
+                    },
+                    "Accuracy": {
+                        "value": "",
+                        "info": [
+                            {
+                                "rule": "No Rules executed",
+                                "OutlierCount": "0"
+                            }
+                        ]
+                    }
+                },
+                "overall": ""
+            }
+        
         result.append(detail)
     return result
  
 if __name__ == '__main__' :
-    profile_api.run(debug=True)
+    app.run(debug=True)
 
 
 
