@@ -89,7 +89,8 @@ def get_count(df):
     num_records = df.count()
     num_columns = len(df.columns)
     grouped_df = df.groupBy(df.columns).count().filter(col("count") > 1)
-    num_duplicates = grouped_df.count()
+    if grouped_df :
+        num_duplicates = grouped_df.count()
 
     count = {
         'nr_records': num_records,
@@ -190,7 +191,7 @@ def getColumnDetail(df):
     for column in df.columns:
         
         detailTime = datetime.now()
-        detail = df.select(
+        detail = df.agg(
             struct(F.min(column).alias('Min'),
             F.max(column).alias('Max'),
             F.avg(column).alias('Average'),
@@ -230,7 +231,8 @@ def getColumnDetail(df):
         detail['maskAnalysis'] = mask
         detail['frequncyAnalysis'] = frequency
       
-        detail['staticalAnalysis'] = lengthStatics(df)
+       # detail['staticalAnalysis'] = lengthStatics(df)
+        detail['staticalAnalysis'] = {}
         detail['correlationSummary'] = {}
         detail['outliersPercent'] = {}
         detail['dq'] =  {"ColumnName": "",
