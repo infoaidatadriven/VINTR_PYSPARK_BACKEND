@@ -48,7 +48,7 @@ class Connector:
             spark_config.set("spark.sql.parquet.fs.optimized.committer.optimization-enabled", "true")
             spark_config.set("spark.hadoop.fs.s3a.experimental.input.fadvise", "sequential")
             spark_config.set("spark.eventlog.enabled", "true")
-            spark_config.set("spark.logConf", "true")
+            spark_config.set("spark.logConf", "true")           
 
             shuffle_partitions = os.getenv("shuffle_partitions", "")
             if shuffle_partitions != "":
@@ -62,13 +62,17 @@ def profile():
     sourcepath = content['sourcepath']
     
     if sourcepath is None :
-        sourcepath = 'F:/AIDataDriven/Data/Titanic01.csv'   
+        sourcepath = 'Titanic01.csv'   
 
     print('API Start :' , datetime.now())
 
-    startTime = datetime.now()    
-    df = spark.read.csv(sourcepath, header=True, inferSchema=True)
-    # df = spark.read.parquet('D:/AI-Data-Driven/Documents/flights_10M.parquet')
+    startTime = datetime.now()
+    extension = sourcepath.split('.')[1]      
+    print(sourcepath)
+    if extension == 'csv':
+        df = spark.read.csv(sourcepath, header=True, inferSchema=True)
+    else :
+        df = spark.read.parquet(sourcepath, header=True, inferSchema=True)
 
     print('API Read Completed:' , datetime.now())
 

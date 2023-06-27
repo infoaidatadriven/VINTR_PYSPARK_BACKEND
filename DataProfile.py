@@ -256,9 +256,20 @@ def configureSourcePC():
 
 @DataProfile.route('/api/configureSourcePC_pyspark', methods=['POST'])
 def configureSourcePyspark():
-    content = request.get_json()       
+    uploaded_files = request.files.getlist("file[]")
+    content = json.loads(request.form.get('data'))  
+
+    for file in uploaded_files:
+            filename = secure_filename(file.filename)
+            if filename != '':
+                    file_ext = os.path.splitext(filename)[1]
+                    if file_ext in ['.csv', '.xlsx', '.xls', '.json', '.parquet'] :
+                        sourcePath = filename
+                        file.save(sourcePath)
+
     data = json.load(open("pysparkProfiledb.json","r"))
-    content['sourceId'] = len(data['SourceDetailsList'])
+    content['sourceId'] = len(data['SourceDetailsList']) + 1
+    content['sourcePath'] = sourcePath
     data['SourceDetailsList'].append(content)
     json.dump(data, open("pysparkProfiledb.json","w"), default=str)
     return json.dumps(content, default=str)
