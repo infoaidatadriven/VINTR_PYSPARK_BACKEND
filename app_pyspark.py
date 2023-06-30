@@ -63,8 +63,8 @@ def profile():
     # sourcepath = content['sourcepath']
 
     # df = spark.read.csv(sourcepath, header=True, inferSchema=True)
-    df = spark.read.csv('D:/AI-Data-Driven/Documents/Titanic01.csv', header=True, inferSchema=True)
-    # df = spark.read.parquet('D:/AI-Data-Driven/Documents/3M.parquet')
+    # df = spark.read.csv('D:/AI-Data-Driven/Documents/Titanic01.csv', header=True, inferSchema=True)
+    df = spark.read.parquet('D:/AI-Data-Driven/Documents/3M.parquet')
 
     profileDetail = profile_endpoint(df)
     jsonString = json.dumps(profileDetail, default=str)
@@ -171,11 +171,23 @@ def unique_value(df):
 
 def dataType(df):
 
-    for column in df.columns:
-        data_type=str(df.schema[column].dataType)    
+    data_types = {}
 
-    # print(data_type)
-    return(data_type)  
+    
+    for column in df.columns:
+        data_type = str(df.schema[column].dataType)
+        
+        if data_type == "IntegerType()" or data_type == "DoubleType()":
+            data_types[column] = "Numeric"
+
+        elif data_type == "datetime64[ns]" or data_type == "datetime":
+            data_types[column] = "Alphabetic"
+
+        elif data_type == "StringType()":
+            data_types[column] = "Alphanumeric"
+
+    return data_types    
+
 
 def frequencyAnalysis(df):
 
