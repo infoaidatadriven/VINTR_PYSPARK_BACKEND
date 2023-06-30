@@ -76,9 +76,11 @@ def profile():
 
     print('API Read Completed:' , datetime.now())
 
-    profileDetail = get_count(df)
-    #profileDetail = {}
-    profileDetail['profile'] = getColumnDetail(df)   
+    # profileDetail = get_count(df)
+    # profileDetail = {}
+    # profileDetail['profile'] = getColumnDetail(df)
+
+    profileDetail = profile_endpoint(df)   
     jsonString = json.dumps(profileDetail, default=str)
 
     print('API End :' , datetime.now(), datetime.now() - startTime)
@@ -89,8 +91,7 @@ def get_count(df):
     num_records = df.count()
     num_columns = len(df.columns)
     grouped_df = df.groupBy(df.columns).count().filter(col("count") > 1)
-    if grouped_df :
-        num_duplicates = grouped_df.count()
+    num_duplicates = grouped_df.count()
 
     count = {
         'nr_records': num_records,
@@ -99,6 +100,7 @@ def get_count(df):
     }
 
     return count
+
 
 def min_max_mean_avg(df):
 
@@ -110,7 +112,7 @@ def min_max_mean_avg(df):
 
     for column in df.columns:
         result[column] = df.\
-        select( F.min(column).alias(f"{min_suffix}{column}"),
+        select( F.min(column).alias(f"Minimum:{min_suffix}{column}"),
             F.max(column).alias(f"{max_suffix}{column}"),
             F.mean(column).alias(f"{mean_suffix}{column}"),
             F.avg(column).alias(f"{avg_suffix}{column}")).collect()[0]
@@ -130,6 +132,41 @@ def lengthStatics(df):
 
     # print(column_stats)
     return column_stats 
+
+def staticalAnalysis(df):
+    get_count(df)
+    min_max_mean_avg(df)
+    lengthStatics(df)
+    unique_value(df)
+    dataType(df)
+
+    combined= {
+        'count': get_count(df),
+        'unique': unique_value(df),
+        'std': stdValue(df),
+        'minmaxmeanavg': min_max_mean_avg(df),
+        'lengthstatics': lengthStatics(df),
+        'dataType': dataType(df)
+        }
+
+    return combined    
+
+
+# def lengthStatics(df):
+#     for column in df.columns:
+#         detail = df.agg(
+#             struct(F.min(column).alias('Min'),
+#                    F.max(column).alias('Max'),
+#                    F.avg(column).alias('Average'),
+#                    F.mean(column).alias('Median')).alias('LengthStatistics'),
+#             struct(min(length(column).alias('MinValLength')),
+#                    max(length(column)).alias('MaxValLength'),
+#                    avg(length(column)).alias('avg_length'),
+#                    stddev(column).alias('Std_Dev'),
+#                    approx_count_distinct(column).alias('UniqueValuesCount')).alias('valueStatistics')).first().asDict(True)
+
+#         # print(detail)
+#         return detail
 
 def stdValue(df):    
     std_dev={}
@@ -166,21 +203,96 @@ def frequencyAnalysis(df):
     # print(frequency_Analysis)
     return frequency_Analysis 
 
-def lengthStatics(df):
-    for column in df.columns:
-        detail = df.agg(
-            struct(F.min(column).alias('Min'),
-                   F.max(column).alias('Max'),
-                   F.avg(column).alias('Average'),
-                   F.mean(column).alias('Median')).alias('LengthStatistics'),
-            struct(min(length(column).alias('MinValLength')),
-                   max(length(column)).alias('MaxValLength'),
-                   avg(length(column)).alias('avg_length'),
-                   stddev(column).alias('Std_Dev'),
-                   approx_count_distinct(column).alias('UniqueValuesCount')).alias('valueStatistics')).first().asDict(True)
+def get_pattern(df):
 
-        # print(detail)
-    return detail
+    alphabetic_cols = [col_name for col_name, data_type in df.dtypes if
+                       data_type == "string" and df.select(col(col_name).rlike("[a-zA-Z]")).first()[0]]
+    pattern = {}
+
+    for column in alphabetic_cols:
+        counts = df.groupBy(column).agg(count("*").alias("count"))
+        counts_data = counts.collect()
+        counts_dict = {}
+        total_count = 0
+        unique_value = "W"
+        for row in counts_data:
+            count_value = row["count"]
+            total_count += count_value
+            if unique_value is None:
+                unique_value = row[column]
+        counts_dict[unique_value]  = total_count  # Include the total count in the unique value representation
+
+        # counts_dict["total_count"] = total_count    
+        pattern[column] = counts_dict
+
+    return pattern
+
+def maskAnalysis(df):
+    alphabetic_cols = [col_name for col_name, data_type in df.dtypes if
+                       data_type == "string" and df.select(col(col_name).rlike("[a-zA-Z]")).first()[0]]
+
+    mask = {}
+
+    for column in alphabetic_cols:
+        counts = df.groupBy(column).agg(count("*").alias("count"))
+        counts_data = counts.collect()
+        counts_dict = {}
+        total_count = 0  # Initialize total count for the column
+        for row in counts_data:
+            column_value = row[column]
+            count_value = row["count"]
+            if column_value is not None:
+                if isinstance(column_value, str):
+                    counts_dict["L" + str(len(column_value))] = count_value
+                else:
+                    counts_dict["L" * int((column_value))] = count_value  # Convert column_value to integer
+            else:
+                counts_dict["L"] = count_value       
+            total_count += count_value
+        mask[column] = counts_dict
+
+    return mask
+
+
+# def get_correlation(df):
+#     # Convert all columns to float type
+#     df = df.limit(20)
+#     for col_name in df.columns:
+#         df = df.withColumn(col_name, col(col_name).cast("float"))
+
+#     # Calculate the correlation value of each column with all other columns
+#     correlations = {}
+#     for col_name in df.columns:
+#         if col_name != "id":  # Skip the "id" column if present
+#             corr_values = {}
+#             for other_col in df.columns:
+#                 if other_col != col_name:
+#                     corr_val = df.stat.corr(col_name, other_col)
+#                     corr_values[other_col] = corr_val
+#             correlations[col_name] = corr_values
+
+#     return correlations
+
+# def find_outliers_in_df(df):
+#     outliers_dict = {}
+#     label_column = df.columns[-1]
+#     for column_name in df.columns[:-1]:
+#         column_stats = df.select(mean(col(column_name)), stddev_pop(col(column_name))).first()
+#         mean_value = column_stats[0]
+#         stddev_value = column_stats[1]
+#         if stddev_value is None:
+#             continue
+#         lower_bound = mean_value - (3 * stddev_value)
+#         upper_bound = mean_value + (3 * stddev_value)
+#         outliers = df.filter((col(column_name) < lower_bound) | (col(column_name) > upper_bound))
+#         outliers_dict[column_name] = outliers   
+#     return outliers_dict
+
+def profile_endpoint(df):
+    spark = SparkSession.builder.getOrCreate()
+
+    profile = get_count(df), lengthStatics(df), stdValue(df), unique_value(df), dataType(df), frequencyAnalysis(df), maskAnalysis(df), get_pattern(df), staticalAnalysis(df)
+    return profile
 
 def getColumnDetail(df):
     result = []
