@@ -204,6 +204,9 @@ def dataType(df):
         elif data_type == "StringType()":
             data_types[column] = "Alphanumeric"
 
+        elif column.lower() == "year" or column.lower() == "year" or column.lower() == "year":
+            data_types[column] = "Numeric"
+
     return data_types
 
 def frequencyAnalysis(df):
