@@ -133,40 +133,25 @@ def lengthStatics(df):
     # print(column_stats)
     return column_stats 
 
-def staticalAnalysis(df):
-    get_count(df)
-    min_max_mean_avg(df)
-    lengthStatics(df)
-    unique_value(df)
-    dataType(df)
+# def staticalAnalysis(df):
+#     get_count(df)
+#     min_max_mean_avg(df)
+#     lengthStatics(df)
+#     unique_value(df)
+#     dataType(df)
 
-    combined= {
-        'count': get_count(df),
-        'unique': unique_value(df),
-        'std': stdValue(df),
-        'minmaxmeanavg': min_max_mean_avg(df),
-        'lengthstatics': lengthStatics(df),
-        'dataType': dataType(df)
-        }
+#     combined= {
+#         'count': get_count(df),
+#         'unique': unique_value(df),
+#         'std': stdValue(df),
+#         'minmaxmeanavg': min_max_mean_avg(df),
+#         'lengthstatics': lengthStatics(df),
+#         'dataType': dataType(df)
+#         }
 
-    return combined    
+#     return combined    
 
 
-# def lengthStatics(df):
-#     for column in df.columns:
-#         detail = df.agg(
-#             struct(F.min(column).alias('Min'),
-#                    F.max(column).alias('Max'),
-#                    F.avg(column).alias('Average'),
-#                    F.mean(column).alias('Median')).alias('LengthStatistics'),
-#             struct(min(length(column).alias('MinValLength')),
-#                    max(length(column)).alias('MaxValLength'),
-#                    avg(length(column)).alias('avg_length'),
-#                    stddev(column).alias('Std_Dev'),
-#                    approx_count_distinct(column).alias('UniqueValuesCount')).alias('valueStatistics')).first().asDict(True)
-
-#         # print(detail)
-#         return detail
 
 def stdValue(df):    
     std_dev={}
@@ -184,6 +169,25 @@ def unique_value(df):
 
     # print(unique)
     return unique
+
+# def dataType(df):
+
+#     data_types = {}
+
+    
+#     for column in df.columns:
+#         data_type = str(df.schema[column].dataType)
+        
+#         if data_type == "IntegerType()" or data_type == "DoubleType()":
+#             data_types[column] = "Numeric"
+
+#         elif data_type == "datetime64[ns]" or data_type == "datetime":
+#             data_types[column] = "Alphabetic"
+
+#         elif data_type == "StringType()":
+#             data_types[column] = "Alphanumeric"
+
+#     return data_types   
 
 def dataType(df):
 
@@ -291,7 +295,7 @@ def maskAnalysis(df):
 def profile_endpoint(df):
     spark = SparkSession.builder.getOrCreate()
 
-    profile = get_count(df), lengthStatics(df), stdValue(df), unique_value(df), dataType(df), frequencyAnalysis(df), maskAnalysis(df), get_pattern(df), staticalAnalysis(df)
+    profile = get_count(df), min_max_mean_avg(df), lengthStatics(df), stdValue(df), unique_value(df), dataType(df), frequencyAnalysis(df), maskAnalysis(df), get_pattern(df)
     return profile
 
 def getColumnDetail(df):
