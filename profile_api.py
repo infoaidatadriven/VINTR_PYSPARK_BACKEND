@@ -108,6 +108,16 @@ def get_count(df):
 
     return count
 
+def get_null_values_count(df):
+    null_counts = df.select([
+        sum(when(col(column).isNull() | (col(column) == ""), 1).otherwise(0)).alias(column)
+        for column in df.columns
+    ])
+
+    null_values_count_dict = null_counts.first().asDict()
+
+    return null_values_count_dict
+
 
 def min_max_mean_avg(df):
 
@@ -140,23 +150,23 @@ def lengthStatics(df):
     # print(column_stats)
     return column_stats 
 
-# def staticalAnalysis(df):
-#     get_count(df)
-#     min_max_mean_avg(df)
-#     lengthStatics(df)
-#     unique_value(df)
-#     dataType(df)
+def staticalAnalysis(df):
+    get_count(df)
+    min_max_mean_avg(df)
+    lengthStatics(df)
+    unique_value(df)
+    dataType(df)
 
-#     combined= {
-#         'count': get_count(df),
-#         'unique': unique_value(df),
-#         'std': stdValue(df),
-#         'minmaxmeanavg': min_max_mean_avg(df),
-#         'lengthstatics': lengthStatics(df),
-#         'dataType': dataType(df)
-#         }
+    combined= {
+        'count': get_count(df),
+        'unique': unique_value(df),
+        'std': stdValue(df),
+        'minmaxmeanavg': min_max_mean_avg(df),
+        'lengthstatics': lengthStatics(df),
+        'dataType': dataType(df)
+        }
 
-#     return combined    
+    return combined
 
 
 
@@ -204,31 +214,7 @@ def frequencyAnalysis(df):
         frequency_Analysis[column] = [(row[0], row[1]) for row in frequency_analysis]
 
     # print(frequency_Analysis)
-    return frequency_Analysis 
-
-def get_pattern(df):
-
-    alphabetic_cols = [col_name for col_name, data_type in df.dtypes if
-                       data_type == "string" and df.select(col(col_name).rlike("[a-zA-Z]")).first()[0]]
-    pattern = {}
-
-    for column in alphabetic_cols:
-        counts = df.groupBy(column).agg(count("*").alias("count"))
-        counts_data = counts.collect()
-        counts_dict = {}
-        total_count = 0
-        unique_value = "W"
-        for row in counts_data:
-            count_value = row["count"]
-            total_count += count_value
-            if unique_value is None:
-                unique_value = row[column]
-        counts_dict[unique_value]  = total_count  # Include the total count in the unique value representation
-
-        # counts_dict["total_count"] = total_count    
-        pattern[column] = counts_dict
-
-    return pattern
+    return frequency_Analysis
 
 def maskAnalysis(df):
     alphabetic_cols = [col_name for col_name, data_type in df.dtypes if
@@ -255,6 +241,30 @@ def maskAnalysis(df):
         mask[column] = counts_dict
 
     return mask
+
+def get_pattern(df):
+
+    alphabetic_cols = [col_name for col_name, data_type in df.dtypes if
+                       data_type == "string" and df.select(col(col_name).rlike("[a-zA-Z]")).first()[0]]
+    pattern = {}
+
+    for column in alphabetic_cols:
+        counts = df.groupBy(column).agg(count("*").alias("count"))
+        counts_data = counts.collect()
+        counts_dict = {}
+        total_count = 0
+        unique_value = "W"
+        for row in counts_data:
+            count_value = row["count"]
+            total_count += count_value
+            if unique_value is None:
+                unique_value = row[column]
+        counts_dict[unique_value]  = total_count  # Include the total count in the unique value representation
+
+        # counts_dict["total_count"] = total_count
+        pattern[column] = counts_dict
+
+    return pattern
 
 
 # def get_correlation(df):
@@ -294,126 +304,12 @@ def maskAnalysis(df):
 def profile_endpoint(df):
     spark = SparkSession.builder.getOrCreate()
 
-    profile = get_count(df), min_max_mean_avg(df), lengthStatics(df), stdValue(df), unique_value(df), dataType(df), frequencyAnalysis(df), maskAnalysis(df), get_pattern(df)
+    profile = get_count(df), get_null_values_count(df), min_max_mean_avg(df), lengthStatics(df), stdValue(df), unique_value(df), dataType(df), frequencyAnalysis(df), maskAnalysis(df), get_pattern(df)
     return profile
 
-def getColumnDetail(df):
-    result = []
 
-    alphabetic_cols =   [col_name for col_name, data_type in df.dtypes if 
-                        data_type == "string" and df.select(col(col_name).rlike("[a-zA-Z]")).first()[0]]
-
-    for column in df.columns:
-        
-        detailTime = datetime.now()
-        detail = df.agg(
-            struct(F.min(column).alias('Min'),
-            F.max(column).alias('Max'),
-            F.avg(column).alias('Average'),
-            F.mean(column).alias('Median')).alias('LengthStatistics'),
-            struct(min(length(column).alias('MinValLength')),
-            max(length(column)).alias('MaxValLength'),
-            avg(length(column)).alias('avg_length'), 
-            stddev(column).alias('Std_Dev'),
-            approx_count_distinct(column).alias('UniqueValuesCount')).alias('valueStatistics')).first().asDict(True)
-        print('Frequency Start :' , column , datetime.now() - detailTime)
-
-        detail['column'] = column       
-        detail['attributeSummary'] = {}
-        detail['attributeSummary']['dataType'] = 'Alphabetic'
-
-        group_counts = df.groupBy(column).agg(count("*").alias("count")).head(15)
-        mask = []
-        frequency = []
-        patterns = []
-
-        for row in group_counts:
-            frequency.append({
-                'unique_values' : row[0],
-                'counts' : row[1]
-            })
-            if column in alphabetic_cols:
-                mask.append({
-                    'unique_values' : row[0],
-                    'counts' : row[1]
-                })
-                patterns.append({
-                    'unique_values' : row[0],
-                    'counts' : row[1]
-                })
-
-        detail['patternAnalysis'] = patterns
-        detail['maskAnalysis'] = mask
-        detail['frequncyAnalysis'] = frequency
-      
-       # detail['staticalAnalysis'] = lengthStatics(df)
-        detail['staticalAnalysis'] = {}
-        detail['correlationSummary'] = {}
-        detail['outliersPercent'] = {}
-        detail['dq'] =  {"ColumnName": "",
-                "detail": {
-                    "Completeness": {
-                        "value": "",
-                        "info": [
-                            {
-                                "rule": "",
-                                "OutlierCount": ""
-                            }
-                        ]
-                    },
-                    "Validity": {
-                        "value": "",
-                        "info": [
-                            {
-                                "rule": "DataType match check (DataType : Numeric) ",
-                                "OutlierCount": "0"
-                            },
-                            {
-                                "rule": "Length check (Min Length should be 3) ",
-                                "OutlierCount": "0"
-                            },
-                            {
-                                "rule": "Length check (Max Length should be 4) ",
-                                "OutlierCount": "0"
-                            }
-                        ]
-                    },
-                    "Consistenecy": {
-                        "value": "",
-                        "info": [
-                            {
-                                "rule": "No Rules Executed",
-                                "OutlierCount": "0"
-                            }
-                        ]
-                    },
-                    "Timeliness": {
-                        "value": "",
-                        "info": [
-                            {
-                                "rule": "file reception frequency check",
-                                "OutlierCount": "0"
-                            }
-                        ]
-                    },
-                    "Accuracy": {
-                        "value": "",
-                        "info": [
-                            {
-                                "rule": "No Rules executed",
-                                "OutlierCount": "0"
-                            }
-                        ]
-                    }
-                },
-                "overall": ""
-            }
-        
-        result.append(detail)
-    return result
- 
 if __name__ == '__main__' :
-    app.run(debug=True)
+    profile_api.run(debug=True)
 
 
 
