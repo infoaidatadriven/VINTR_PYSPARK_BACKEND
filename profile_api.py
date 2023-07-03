@@ -14,7 +14,8 @@ from pyspark import SparkConf
 from pyspark.shell import spark
 from pyspark.sql import SparkSession
 import pyspark.sql.functions as F
-from pyspark.sql.functions import col, count, when, isnan, length, min, max, avg, mean, count, struct
+from functools import reduce
+from pyspark.sql.functions import col, count, when, isnan, length, min, max, avg, mean, count, struct, sum
 from pyspark.sql.functions import stddev, to_json, collect_list, approx_count_distinct, explode, length, \
     approx_count_distinct, stddev, concat_ws
 from Datacatlog import getcatalogueforcolumns
@@ -92,11 +93,17 @@ def get_count(df):
     num_columns = len(df.columns)
     grouped_df = df.groupBy(df.columns).count().filter(col("count") > 1)
     num_duplicates = grouped_df.count()
+    null_counts = df.select([
+        sum(when(col(column).isNull() | (col(column) == ""), 1).otherwise(0)).alias(column)
+        for column in df.columns
+    ])
+    total_null_count = reduce(lambda x, y: x + y, null_counts.first().asDict().values())
 
     count = {
         'nr_records': num_records,
         'nr_columns': num_columns,
-        'nr_duplicates': num_duplicates
+        'nr_duplicates': num_duplicates,
+        'null_counts': total_null_count
     }
 
     return count
@@ -170,32 +177,24 @@ def unique_value(df):
     # print(unique)
     return unique
 
-# def dataType(df):
-
-#     data_types = {}
-
-    
-#     for column in df.columns:
-#         data_type = str(df.schema[column].dataType)
-        
-#         if data_type == "IntegerType()" or data_type == "DoubleType()":
-#             data_types[column] = "Numeric"
-
-#         elif data_type == "datetime64[ns]" or data_type == "datetime":
-#             data_types[column] = "Alphabetic"
-
-#         elif data_type == "StringType()":
-#             data_types[column] = "Alphanumeric"
-
-#     return data_types   
-
 def dataType(df):
 
-    for column in df.columns:
-        data_type=str(df.schema[column].dataType)    
+    data_types = {}
 
-    # print(data_type)
-    return(data_type)  
+    
+    for column in df.columns:
+        data_type = str(df.schema[column].dataType)
+        
+        if data_type == "IntegerType()" or data_type == "DoubleType()":
+            data_types[column] = "Numeric"
+
+        elif data_type == "datetime64[ns]" or data_type == "datetime":
+            data_types[column] = "Alphabetic"
+
+        elif data_type == "StringType()":
+            data_types[column] = "Alphanumeric"
+
+    return data_types
 
 def frequencyAnalysis(df):
 
