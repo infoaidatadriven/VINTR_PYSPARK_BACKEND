@@ -246,7 +246,6 @@ def maskAnalysis(df):
     return mask
 
 def get_pattern(df):
-
     alphabetic_cols = [col_name for col_name, data_type in df.dtypes if
                        data_type == "string" and df.select(col(col_name).rlike("[a-zA-Z]")).first()[0]]
     pattern = {}
@@ -256,15 +255,21 @@ def get_pattern(df):
         counts_data = counts.collect()
         counts_dict = {}
         total_count = 0
-        unique_value = "W"
+
         for row in counts_data:
             count_value = row["count"]
             total_count += count_value
-            if unique_value is None:
-                unique_value = row[column]
-        counts_dict[unique_value]  = total_count  # Include the total count in the unique value representation
+            column_value = row[column]
 
-        # counts_dict["total_count"] = total_count
+            if column_value is not None:
+                if isinstance(column_value, str):
+                    words = column_value.split()
+                    word_pattern = "-".join(["W" for _ in range(len(words))])
+                    if word_pattern in counts_dict:
+                        counts_dict[word_pattern] += count_value
+                    else:
+                        counts_dict[word_pattern] = count_value
+
         pattern[column] = counts_dict
 
     return pattern
