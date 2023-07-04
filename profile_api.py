@@ -15,7 +15,7 @@ from pyspark.shell import spark
 from pyspark.sql import SparkSession
 import pyspark.sql.functions as F
 from functools import reduce
-from pyspark.sql.functions import col, count, when, isnan, length, min, max, avg, mean, count, struct, sum
+from pyspark.sql.functions import col, count, when, isnan, length, min, max, avg, mean, count, struct, sum, stddev_pop
 from pyspark.sql.functions import stddev, to_json, collect_list, approx_count_distinct, explode, length, \
     approx_count_distinct, stddev, concat_ws
 from Datacatlog import getcatalogueforcolumns
@@ -99,11 +99,27 @@ def get_count(df):
     ])
     total_null_count = reduce(lambda x, y: x + y, null_counts.first().asDict().values())
 
+    outliers_dict = {}
+    total_outliers_count = 0
+    for column in df.columns:
+        stats = df.select(mean(col(column)).alias("mean"), stddev_pop(col(column)).alias("stddev")).first()
+        mean_value = stats["mean"]
+        stddev_value = stats["stddev"]
+        if stddev_value is None:
+            continue
+        upper_limit = mean_value + (stddev_value * 3)
+        lower_limit = mean_value - (stddev_value * 3)
+        outliers = df.filter((col(column) > upper_limit) | (col(column) < lower_limit)).select(column).collect()
+        outliers_list = [row[column] for row in outliers]
+        outliers_dict[column] = outliers_list
+        total_outliers_count += len(outliers_list)
+
     count = {
         'nr_records': num_records,
         'nr_columns': num_columns,
         'nr_duplicates': num_duplicates,
-        'null_counts': total_null_count
+        'null_counts': total_null_count,
+        'nr_outliers': total_outliers_count
     }
 
     return count
@@ -275,6 +291,40 @@ def get_pattern(df):
     return pattern
 
 
+def detect_outliers():
+    # Get the DataFrame from the request
+    data = request.json
+
+    # Create a Spark DataFrame from the input data
+    df = spark.createDataFrame(data)
+
+    # Call the outlier detection function
+    outliers = outlierDetection(df)
+
+    # Convert outliers to JSON response
+    response = jsonify(outliers)
+    return response
+
+
+def outlierDetection(df):
+    outliers_dict = {}
+    total_outliers_count = 0
+    for column in df.columns:
+        stats = df.select(mean(col(column)).alias("mean"), stddev_pop(col(column)).alias("stddev")).first()
+        mean_value = stats["mean"]
+        stddev_value = stats["stddev"]
+        if stddev_value is None:
+            continue
+        upper_limit = mean_value + (stddev_value * 3)
+        lower_limit = mean_value - (stddev_value * 3)
+        outliers = df.filter((col(column) > upper_limit) | (col(column) < lower_limit)).select(column).collect()
+        outliers_list = [row[column] for row in outliers]
+        outliers_dict[column] = outliers_list
+        total_outliers_count += len(outliers_list)
+
+    return outliers_dict
+
+
 # def get_correlation(df):
 #     # Convert all columns to float type
 #     df = df.limit(20)
@@ -294,25 +344,10 @@ def get_pattern(df):
 
 #     return correlations
 
-# def find_outliers_in_df(df):
-#     outliers_dict = {}
-#     label_column = df.columns[-1]
-#     for column_name in df.columns[:-1]:
-#         column_stats = df.select(mean(col(column_name)), stddev_pop(col(column_name))).first()
-#         mean_value = column_stats[0]
-#         stddev_value = column_stats[1]
-#         if stddev_value is None:
-#             continue
-#         lower_bound = mean_value - (3 * stddev_value)
-#         upper_bound = mean_value + (3 * stddev_value)
-#         outliers = df.filter((col(column_name) < lower_bound) | (col(column_name) > upper_bound))
-#         outliers_dict[column_name] = outliers   
-#     return outliers_dict
-
 def profile_endpoint(df):
     spark = SparkSession.builder.getOrCreate()
 
-    profile = get_count(df), get_null_values_count(df), min_max_mean_avg(df), lengthStatics(df), stdValue(df), unique_value(df), dataType(df), frequencyAnalysis(df), maskAnalysis(df), get_pattern(df)
+    profile = get_count(df), get_null_values_count(df), min_max_mean_avg(df), lengthStatics(df), stdValue(df), unique_value(df), dataType(df), frequencyAnalysis(df), maskAnalysis(df), get_pattern(df), outlierDetection(df)
     return profile
 
 
