@@ -84,7 +84,12 @@ def profile():
     return jsonString   
 
 def get_preview(df):
-     df.show(truncate=False)
+
+    preview = {
+        df.show(truncate=False)
+    }
+
+    return preview
 
 def profile_endpoint(df):
     spark = SparkSession.builder.getOrCreate()
