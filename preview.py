@@ -53,7 +53,7 @@ class Connector:
             return spark_config
         
 
-@profile_api.route("/api/profile_preview", methods=['POST'])
+@profile_api.route("/api/profile_preview", methods=['GET'])
 def profile():    
     content = request.get_json()
     sourcepath = content['sourcepath']
@@ -84,12 +84,20 @@ def profile():
     return jsonString   
 
 def get_preview(df):
+    # Assuming you have a DataFrame object named `df`
+    # df = spark.read.csv('D:/AI-Data-Driven/Documents/csv/Titanic01.csv', header=True)  # Replace with your DataFrame loading code
 
-    preview = {
-        df.show(truncate=False)
-    }
+    df_preview = df.limit(1000)
+    columns = df_preview.columns
+    preview_data = df_preview.collect()
 
-    return preview
+    preview_rows = []
+    for row in preview_data:
+        preview_rows.append(row.asDict())
+
+    preview_json = {'columns': columns, 'data': preview_rows}
+
+    return jsonify(preview_json)
 
 def profile_endpoint(df):
     spark = SparkSession.builder.getOrCreate()
