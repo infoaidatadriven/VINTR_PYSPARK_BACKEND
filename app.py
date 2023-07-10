@@ -68,6 +68,7 @@ from module_dqm import module_dqm
 from common_PC_Function import *
 from profile_api import profile_api
 from DataProfile import DataProfile
+from preview import preview_api
 
 import csv
 from module_plot import *
@@ -87,6 +88,7 @@ app.register_blueprint(DataProfile)
 app.register_blueprint(DataClean)
 app.register_blueprint(module_dqm)
 app.register_blueprint(profile_api)
+app.register_blueprint(preview_api)
 # app.register_blueprint(reports)
 CORS(app)
 app.config['UPLOAD_EXTENSIONS'] = ['.csv', '.xlsx', '.xls', '.json', '.xml']

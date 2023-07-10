@@ -10,15 +10,20 @@ from dataQuality import checkQuality, checkDataQuality, savequlaitychecktodb
 
 # Importing pyspark functions
 
-
 from pyspark import SparkConf
 from pyspark.shell import spark
 from pyspark.sql import SparkSession
 import pyspark.sql.functions as F
+from functools import reduce
+from pyspark.sql.functions import col, count, when, isnan, length, min, max, avg, mean, count, struct, sum, stddev_pop
+from pyspark.sql.functions import stddev, to_json, collect_list, approx_count_distinct, explode, length, \
+    approx_count_distinct, stddev, concat_ws
+from Datacatlog import getcatalogueforcolumns
+from pyspark.sql.types import FloatType
 
 # converting this file as BluePrint to route in app.py and make it executable
 
-profile_api = Blueprint('preview', __name__)
+preview_api = Blueprint('Preview_api', __name__)
 
 class Connector:
         def __init__(self):
@@ -52,9 +57,8 @@ class Connector:
 
             return spark_config
         
-
-@profile_api.route("/api/profile_preview", methods=['GET'])
-def profile():    
+@preview_api.route("/api/preview", methods=['GET'])
+def preview():    
     content = request.get_json()
     sourcepath = content['sourcepath']
     
@@ -77,11 +81,11 @@ def profile():
     # profileDetail = {}
     # profileDetail['profile'] = getColumnDetail(df)
 
-    profileDetail = profile_endpoint(df)   
-    jsonString = json.dumps(profileDetail, default=str)
+    previewDetail = preview_endpoint(df)   
+    jsonString = json.dumps(previewDetail, default=str)
 
     print('API End :' , datetime.now(), datetime.now() - startTime)
-    return jsonString   
+    return jsonString      
 
 def get_preview(df):
     # Assuming you have a DataFrame object named `df`
@@ -97,11 +101,10 @@ def get_preview(df):
 
     preview_json = {'columns': columns, 'data': preview_rows}
 
-    return jsonify(preview_json)
+    return jsonify(preview_json)  
 
-def profile_endpoint(df):
+def preview_endpoint(df):
     spark = SparkSession.builder.getOrCreate()
 
-    profile = get_preview(df)
-    return profile
-          
+    preview = get_preview(df)
+    return preview
