@@ -56,10 +56,10 @@ class Connector:
                 spark_config.set("spark.sql.shuffle.partitions", shuffle_partitions)
 
             return spark_config
-        
-@preview_api.route("/api/preview", methods=['GET'])
-def preview():    
-    content = request.get_json()
+
+@preview_api.route("/api/preview", methods=['POST'])
+def preview():
+    content = request.json
     sourcepath = content['sourcepath']
     
     if sourcepath is None :
@@ -77,20 +77,11 @@ def preview():
 
     print('API Read Completed:' , datetime.now())
 
-    # profileDetail = get_count(df)
-    # profileDetail = {}
-    # profileDetail['profile'] = getColumnDetail(df)
-
     previewDetail = preview_endpoint(df)   
-    jsonString = json.dumps(previewDetail, default=str)
-
     print('API End :' , datetime.now(), datetime.now() - startTime)
-    return jsonString      
+    return jsonify(previewDetail)      
 
 def get_preview(df):
-    # Assuming you have a DataFrame object named `df`
-    # df = spark.read.csv('D:/AI-Data-Driven/Documents/csv/Titanic01.csv', header=True)  # Replace with your DataFrame loading code
-
     df_preview = df.limit(1000)
     columns = df_preview.columns
     preview_data = df_preview.collect()
@@ -101,7 +92,7 @@ def get_preview(df):
 
     preview_json = {'columns': columns, 'data': preview_rows}
 
-    return jsonify(preview_json)  
+    return preview_json
 
 def preview_endpoint(df):
     spark = SparkSession.builder.getOrCreate()
